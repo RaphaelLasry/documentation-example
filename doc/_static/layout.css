@@ -1,0 +1,41 @@
+/*
+Add any additional styles here
+*/
+
+/* Add a custom 'sheet' icon to the note admonition */
+.admonition.note .admonition-title::before {
+    content: "📄 ";
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: -5px;
+    vertical-align: middle;
+    font-size: 1.7em;
+}
+
+/* Add a border to the note admonition and tune font-size*/
+.admonition.note .admonition-title{
+    vertical-align: middle;
+    font-size: 1.2em;
+    border: 2px solid #2980B9; /* Add a border with desired color */
+    border-left: 7px solid #2980B9;
+}
+
+/* Show content on full html page */
+.wy-nav-content {
+    max-width: none;
+}
+
+body {
+    text-align: justify;
+}
+
+/* Can be used to change the font of the math equations */
+/*.MJX-TEX,
+.MJX-TEX * {
+    font-family: "Cambria Math" !important;   /*"MJXTEX", "Corbel"
+    letter-spacing: 0.7em;
+}
+.mjx-i {
+        font-family: "libertine" !important;
+}*/
+
