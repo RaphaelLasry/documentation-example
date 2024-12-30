@@ -3,7 +3,7 @@
 Cactus user documentation
 ===========================
 
-The purpose of this document is to provide a comprehensive guide on how to use the Cactus software. You will find both a general modeling guidelines for Cactus's modules and detailed parameter documentation for all input sheets. 
+AAAA The purpose of this document is to provide a comprehensive guide on how to use the Cactus software. You will find both a general modeling guidelines for Cactus's modules and detailed parameter documentation for all input sheets. 
 
 Cactus in a nutshell
 ----------------------
