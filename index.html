@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cactus user documentation &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/layout.css?v=f294cb7b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Global Parameters" href="docs/global_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#">
+            
+              <img src="_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/global_parameters.html">1. Global Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/demand.html">2. Demand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/production.html">3. Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/market.html">4. Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/lng.html">5. LNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/pipeline.html">6. Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/storage.html">7. Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/sddp.html">8. SDDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/shipping.html">9. Shipping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/time_series.html">10. Time Series</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cactus user documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cactus-user-documentation">
+<h1>Cactus user documentation<a class="headerlink" href="#cactus-user-documentation" title="Link to this heading"></a></h1>
+<p>The purpose of this document is to provide a comprehensive guide on how to use the Cactus software. You will find both a general modeling guidelines for Cactus’s modules and detailed parameter documentation for all input sheets.</p>
+<section id="cactus-in-a-nutshell">
+<h2>Cactus in a nutshell<a class="headerlink" href="#cactus-in-a-nutshell" title="Link to this heading"></a></h2>
+<p>Cactus helps you optimize the dispatch of the gas in the world and operate the storages in order to get a view on the mid term market evolution.</p>
+<div class="tip admonition">
+<p class="admonition-title">Cactus purpose and model</p>
+<p><strong>Cactus provides the optimal dispatch of your energy system minimizing its Total Cost of Ownership (TCO).</strong></p>
+<p>The tool is based on a <em>linear programming (LP)</em> model that optimizes the operation of a set of assets (appros, storages, pipes, markets etc.) and their interconnections (PIR, PTS, PTM) to meet a set of energy demands. The optimization problem is defined as follows <a class="footnote-reference brackets" href="#capacity-energy" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+        \min \quad&amp; \text{Gas production and supply costs} \\
+        &amp;+ \text{Storage costs} \\
+        &amp;+ \text{Tariffs and costs for entry and exit points} \\
+        &amp;+ \text{Additional capacity} \\
+        \text{if LNG:} \quad&amp;+ \text{Shipping costs} \\
+        \text{if SDDP:} \quad&amp;+ \text{Cost of future objective} \\
+        \text{if Ecart:} \quad&amp;+ \text{Penalties and imbalances} \\[3ex]
+        \text{subject to} \quad&amp; \text{Balance constraints} \quad \textit{ (flow conservation)} \\
+        &amp; \text{Operating constraints} \quad \textit{ (minimum/maximum offtake for contracts)} \\
+        &amp; \text{Storage level} \quad \textit{ (CATS and tunnel)} \\
+        &amp; \text{Shipping capacity} \quad \textit{ (load and unload on vessels)} \\
+        &amp; \text{Maintenance constraints} \quad \textit{ (periodic maintenance schedules)} \\
+        &amp; \text{...}
+\end{align*}\end{split}\]</div>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="capacity-energy" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Mosts of the costs that are both for the flow (MWh) and the capacity (MW) of the asset. It is possible in Cactus to increase part of the existing capacity for different type of objects.</p>
+</aside>
+</aside>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docs/global_parameters.html" class="btn btn-neutral float-right" title="1. Global Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

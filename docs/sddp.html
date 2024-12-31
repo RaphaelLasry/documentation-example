@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. SDDP &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/layout.css?v=f294cb7b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. Shipping" href="shipping.html" />
+    <link rel="prev" title="7. Storage" href="storage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="global_parameters.html">1. Global Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demand.html">2. Demand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="production.html">3. Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">4. Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lng.html">5. LNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">6. Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">7. Storage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. SDDP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-introduction">General introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-description-and-model-assumptions">Technical description and model assumptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modeling-cases">Modeling Cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-horizon-time-intervals-and-time-partition">Time Horizon, Time Intervals and Time Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flows">Flows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technologies-and-markets">Technologies and Markets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#node-and-distances">Node and distances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pollutants">Pollutants</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shipping.html">9. Shipping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">10. Time Series</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>SDDP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/sddp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sddp">
+<h1><span class="section-number">8. </span>SDDP<a class="headerlink" href="#sddp" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-introduction" id="id1">General introduction</a></p></li>
+<li><p><a class="reference internal" href="#technical-description-and-model-assumptions" id="id2">Technical description and model assumptions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#modeling-cases" id="id3">Modeling Cases</a></p></li>
+<li><p><a class="reference internal" href="#time-horizon-time-intervals-and-time-partition" id="id4">Time Horizon, Time Intervals and Time Partition</a></p></li>
+<li><p><a class="reference internal" href="#flows" id="id5">Flows</a></p></li>
+<li><p><a class="reference internal" href="#technologies-and-markets" id="id6">Technologies and Markets</a></p></li>
+<li><p><a class="reference internal" href="#node-and-distances" id="id7">Node and distances</a></p></li>
+<li><p><a class="reference internal" href="#pollutants" id="id8">Pollutants</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#excel-input-sheets" id="id9">Excel input sheets</a></p></li>
+</ul>
+</nav>
+<section id="general-introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">General introduction</a><a class="headerlink" href="#general-introduction" title="Link to this heading"></a></h2>
+<p>In Prosumer, users model scenarios that can be divided into different cases to incorporate variations. The objective of the global setup is to enable users to define the primary structure of the scenario and its key components. This includes defining cases, the optimization time horizon, flows (energy  vectors), scenario topology (nodes and distances), assets (technologies and markets), and pollutants.</p>
+<p>This initial step in modeling provides an overview of the scenario and its main components, serving as a foundation for the more detailed modeling of the scenario in subsequent modules.</p>
+</section>
+<section id="technical-description-and-model-assumptions">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Technical description and model assumptions</a><a class="headerlink" href="#technical-description-and-model-assumptions" title="Link to this heading"></a></h2>
+<p>This section explains in more details each section of the global set up and its related assumptions.</p>
+<div class="tip admonition">
+<p class="admonition-title">Prosumer’s Global Set Up</p>
+<p>Prosumer is a versatile tool with numerous features. The global setup <strong>guides modelling</strong> by providing a foundational framework.</p>
+</div>
+<section id="modeling-cases">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Modeling Cases</a><a class="headerlink" href="#modeling-cases" title="Link to this heading"></a></h3>
+<p>Each Prosumer’s scenario contains at least one case, the base case. The user can define additional cases to optimize different scenario variations of the base case, which might save modeling time instead of modeling a new scenario from scratch for each variation.</p>
+<p>For each case, the user can choose the following parameters :</p>
+<ul class="simple">
+<li><p><strong>Optimization criteria</strong> which goes between “NPV” (optimizing Net Present Value) and “CO2” (minimizing CO2 emissions).</p></li>
+<li><p><strong>Discount rate</strong> (also known as WACC for weighted average cost of capital) which is used to calculate the Net Present Value.</p></li>
+<li><p>The <strong>maximum discounted total cost</strong> in [EUR] which is used to constraint the total cost of the scenario.</p></li>
+</ul>
+<p>Note all other features are depreciated and will be removed in future versions.</p>
+<div class="note admonition">
+<p class="admonition-title">Case Variations</p>
+<p>Although we can assign different case parameters as explained previously, even <strong>more differences between cases can be done in next modeling steps</strong> by modifying the case related technologies, markets, lines, pollutants, meters and much more.</p>
+</div>
+</section>
+<section id="time-horizon-time-intervals-and-time-partition">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Time Horizon, Time Intervals and Time Partition</a><a class="headerlink" href="#time-horizon-time-intervals-and-time-partition" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Time Horizon</strong></p></li>
+</ol>
+<p>In Prosumer, the optimization occurs over a <strong>time horizon (in years)</strong>, which must be the same for all cases. On that time horizon, we optimize the <strong>investment decisions (asset sizing)</strong> for all years. However, the user must also define optimization years which will be a subset of the year span where only the optimization of the <strong>operational decisions (dispatch)</strong> will be done. The choice of not optimizing dispatch on each year can be useful for data or computational time purposes.</p>
+<p>One simple example for the user would be to optimize from 2025 to 2050, but only optimize dispatch for 2025, 2035, 2045 if the user feels like those three years represent well the entire year span of the scenario.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Time Intervals</strong></p></li>
+</ol>
+<p>In Prosumer, <strong>granularity for optimization is set to hours</strong>. For each case, the years to optimize are by default divided into 8760 hours (365 days * 24 hours). However, the user can choose to only consider subsets of those 8760 hours by defining <strong>hour intervals</strong>. Those intervals can be different between any case and optimized year pair. This feature can <strong>reduce drastically the size of the problem</strong> in order to quickly obtain good approximate decisions. Be aware that the selection of the period should be done carefully. If non-representative periods are provided, poor sizing decisions might be given by Prosumer.</p>
+<p>For instance, the user can feel the first 1000 hours of the years are representative of the entire year and decide to optimize only on those hours (for all cases and years to optimize). This will drastically reduce the size of the problem.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Time Partition</strong></p></li>
+</ol>
+<p>In Prosumer, the user can also model time partitions, where one time partition corresponds to <strong>assigning some time blocks (labels) to each of 8760 hours</strong>. Note by default the time partition is called “default_yearly_tp” with only one time block “default_yearly_tb”, meaning all hours are labeled the same and we consider only one big time block corresponding to the entire year.</p>
+<p>The user could for instance label all hours in 7 time blocks : “Mondays_hours” up to “Sunday_hours”. This would enable the user to model constraints on certain specific days of the week. Of course there is no limit to the number of time partitions and time blocks that can be defined.</p>
+<div class="warning admonition">
+<p class="admonition-title">Warning</p>
+<p>Pay attention that each time block name should be related to a single time partition.</p>
+</div>
+</section>
+<section id="flows">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Flows</a><a class="headerlink" href="#flows" title="Link to this heading"></a></h3>
+<p>In Prosumer, flows are <strong>energy vectors</strong> that are considered in the model. Those flows can be produced by assets or bought from retail markets, they can be converted into other flows using converter assets, and finally they can be consumed by demand or sold on wholesale markets.
+The user can define all the flows he wants to consider in the scenario.</p>
+<div class="tip admonition">
+<p class="admonition-title">Prosumer’s multi-dimensionality</p>
+<p>Prosumer is a generic tool with <strong>multiple dimensions</strong>. One main dimension represents <strong>flows that evolve in two other dimensions which are time and location</strong>. Flows can be produced, converted, consumed, bought and sold at any defined time on any defined node.</p>
+</div>
+</section>
+<section id="technologies-and-markets">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Technologies and Markets</a><a class="headerlink" href="#technologies-and-markets" title="Link to this heading"></a></h3>
+<p>In Prosumer, the user can define the technologies and markets that will be considered in the scenario, where he can stipulate their <strong>types</strong>, <strong>location (which node)</strong> and whether they are <strong>virtual assets</strong> or not (meaning they have no impact on the Total Cost of Ownership). By default all assets are <strong>not virtual assets</strong>. Introducing virtual assets can be relevant for modelisation purpose.</p>
+<p>Here is the list of all different types of technologies/markets :</p>
+<ul class="simple">
+<li><p><strong>Converter</strong> : A technology that can convert flows into other flows. For instance, a heat pump converting electricity into heat.</p></li>
+<li><p><strong>VRES</strong> : Variable renewable energy sources, that can be divided into <strong>Solar</strong> and <strong>Wind</strong> in Prosumer. For instance, solar panels or wind turbines.</p></li>
+<li><p><strong>Storage</strong> : A technology that can store flows. For instance, batteries storing electricity.</p></li>
+<li><p><strong>Genset</strong> : A generator technology that can produce flows based on some input flow. For instance, a diesel generator producing electricity.</p></li>
+<li><p><strong>Vehicle</strong> : A vehicle technology that is constrained to drive a certain distance. For instance, an electric vehicle. Note the node name on which it is defined is not a classic node (geographic) but the name of the fleet to which it corresponds. See <strong>Mobility section</strong>.</p></li>
+<li><p><strong>Connector</strong> : A station that can connect vehicle technologies to the grid. For instance, a charging station.</p></li>
+<li><p><strong>Market</strong> : A market where flows can be bought (retail) or sold (wholesale). For instance, a retail electricity market.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title">Base case heritage</p>
+<p>In Prosumer’s modelling logic, if we define an object/parameter on the base case, it <strong>applies to all other cases</strong> unless explicitly stipulated. Note it is <strong>applicable on the User Interface</strong>, where defining any technology/market on the basecase will automatically define it on all cases. However, in the Excel template (more advance usage), the user must define for each case the technologies/markets he wants to consider. There is <strong>no base case heritage in the Excel template</strong> regarding the technologies/markets definition.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Definition of technology/market asset</p>
+<p>Note any <strong>technology/market asset</strong> is defined based on its <strong>techno/market name</strong>, and on the <strong>node</strong> it is defined on. Two technologies with the same name on different nodes are considered as different assets. However, some technological asset (e.g. converters) can have multiple flows going in and out, and thus <strong>assigning different flows does not make them different assets</strong>.</p>
+</div>
+</section>
+<section id="node-and-distances">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Node and distances</a><a class="headerlink" href="#node-and-distances" title="Link to this heading"></a></h3>
+<p>In Prosumer, we can define a <strong>model topology</strong> where we can define <strong>nodes and distances</strong> between them. Nodes are the locations where assets are defined and where flows are exchanged. Distances are the distances between nodes, which can be used to model constraints on the flows between nodes. This enables the <strong>modelling of a network</strong> where flows are produced/consumed/bought/sold on some nodes and can be <strong>transported though lines between node pairs</strong>, see section dedicated to <strong>Lines assets</strong>.</p>
+<p>By default, there is only one node in the problem and all assets are defined on that node.</p>
+</section>
+<section id="pollutants">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Pollutants</a><a class="headerlink" href="#pollutants" title="Link to this heading"></a></h3>
+<p>In Prosumer, the user can define pollutants that will be considered in the scenario. Pollutants can be emitted by assets and those <strong>emissions can be constrained</strong> and <strong>penalized</strong> in the model. We can define the following parameters :</p>
+<ul class="simple">
+<li><p><strong>Scope Weights</strong> : those weights (three for each scope 1, 2 and 3) are used to penalize in each scope the emissions. Those weights depend on the case, pollutant and can also depend on the node.</p></li>
+<li><p><strong>Maximum Total Emissions</strong> : the maximum total emissions of the pollutant in [kg] corresponds to the upper bound of total emissions for any case, pollutant and node if desired.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">CO2 default pollutant</p>
+<p><strong>CO2</strong> is always defined as <strong>default pollutant</strong> in Prosumer, but the user can add any other pollutant he wants to consider in the scenario.</p>
+</div>
+</section>
+</section>
+<section id="excel-input-sheets">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Excel input sheets</a><a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Cases</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ is solved?</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Binary flag indicating if the case should be solved (1) or not (0).</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ optimization criteria</dt><dd><ul class="simple">
+<li><p><em>Description:</em> What do you aim to optimize? 2 choices: ‘NPV’ (Net Present Value) or ‘CO2’ emissions.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ discount rate</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Discount rate used to calculate the Net Present Value (NPV), also known as WACC (Weighted Average Cost of Capital). Expressed in % between 0.0 and 100.0</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> %</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ inflation rate</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Depreciated</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> %</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ tax (depreciation)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Depreciated</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> %</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ tax (revenue)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Depreciated</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> %</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ max discounted total cost</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum (discounted) total cost for the case in [EUR], representing CAPEX + OPEX over all years discounted by the WACC or discount factor. In case of any constraint, enter a non negative value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> EUR</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Time frame</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Repr time interval</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ weight</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Weight (magnitude of importance) given to the selected time interval, between 0.0 and 1.0. The sum of all weights for a given optimized year should be equal to 1.0</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Flow</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Nodes</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ node area</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Surface area of the node in [m^2]. In case of any constraint, enter a positive value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> m^2</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ maximum noise intensity level</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum total noise intensity level for the assets of the node in [kW/m^2]. It is possible to define a noise power parameter for the different technologies and a distance to the measurement point on the node (at which the noise constraint should be verified). In fact, the noise intensity is a function of the distance to the measurement point. In case of any constraint, enter a positive value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> kW/m^2</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Nodes distances</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ distance</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Distance between origin and destination nodes expressed in [m]. This distance is used to calculate the line length from any origin to any destination node. In case of any line defined in the scenario, enter a positive value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> m</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Technologies Markets</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ is virtual?</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Is this asset virtual, i.e. having no impact on the TCO and added for modelisation purposes only (no physical reality)? If yes, enter 1. If no, enter 0. A virtual asset wont appear or will be flagged as such on some output sheets.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Pollutants</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ max total emission</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum total (discounted) pollutant emission for the case over all years, expressed in [kg] of according pollutant. In case of any constraint, enter a non negative value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> kg</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ pollutant_scope_global_weights</dt><dd><ul class="simple">
+<li><p><em>Description:</em> (TBD)</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ weight - scope1</dt><dd><ul class="simple">
+<li><p><em>Description:</em> (TBD)</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ weight - scope2</dt><dd><ul class="simple">
+<li><p><em>Description:</em> (TBD)</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ weight - scope3</dt><dd><ul class="simple">
+<li><p><em>Description:</em> (TBD)</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ emissions actualisation factor</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Discount factor for pollutant emissions. If a discount applies, enter a non-negative value. Otherwise, leave the cell empty to apply no discount by default.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Pollutants Nodal</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+<dl class="simple">
+<dt>⚙️ pollutant_scope_weights</dt><dd><ul class="simple">
+<li><p><em>Description:</em> (TBD)</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> (TBD)</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+<dt>⚙️ max total nodal emission</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum total (discounted) pollutant emissions of pollutant for the node, expressed in [mass unit]. In case of any constraint, enter a non negative value, otherwise leave it empty.</p></li>
+<li><p><em>Default value:</em> (TBD)</p></li>
+<li><p><em>Default unit:</em> mass unit</p></li>
+<li><p><em>Validity:</em> (TBD)</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition">
+<p class="admonition-title">1 Global - Time partition</p>
+<p><em>Sheet description</em>: (TBD)</p>
+<p><em>Mandatory sheet</em>: (TBD)</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="storage.html" class="btn btn-neutral float-left" title="7. Storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shipping.html" class="btn btn-neutral float-right" title="9. Shipping" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

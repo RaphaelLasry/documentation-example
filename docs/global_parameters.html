@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Global Parameters &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/layout.css?v=f294cb7b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Demand" href="demand.html" />
+    <link rel="prev" title="Cactus user documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Global Parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demand.html">2. Demand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="production.html">3. Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">4. Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lng.html">5. LNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">6. Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">7. Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sddp.html">8. SDDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shipping.html">9. Shipping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">10. Time Series</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Global Parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/global_parameters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="global-parameters">
+<h1><span class="section-number">1. </span>Global Parameters<a class="headerlink" href="#global-parameters" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#excel-input-sheets" id="id1">Excel input sheets</a></p></li>
+</ul>
+</nav>
+<section id="excel-input-sheets">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Excel input sheets</a><a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<div class="note admonition" id="target-periods">
+<p class="admonition-title">Horizon</p>
+<p><em>Sheet description</em>: Definition of the periods of the optimization horizon.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Periode</p></th>
+<th class="head"><p>Date debut</p></th>
+<th class="head"><p>Pointe (1)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Index1 (ex: 1)</p></td>
+<td><p>Date1 (ex: 01/01/2020)</p></td>
+<td><p>BooleanPointe1 (ex: 0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Index2 (ex: 2)</p></td>
+<td><p>Date2 (ex: 01/02/2020)</p></td>
+<td><p>BooleanPointe2 (ex: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mandatory sheet</em>: ✅</p>
+<dl class="simple">
+<dt>⚙️ Periode</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unique index for the period.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Date debut</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Date of the beginning of the period.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> At least two periods must be defined. The granularity can be set up by the user (daily, weekly, monthly, yearly etc.).</p></li>
+</ul>
+</dd>
+<dt>⚙️ Pointe (1)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Boolean that state whether the period is a peak period or not.</p></li>
+<li><p><em>Default value:</em> 0</p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Boolean</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition" id="target-zones">
+<p class="admonition-title">Zones</p>
+<p><em>Sheet description</em>: Topology of the simulation. The user can define all the zones (country, region or even virtual location) that will be used in the simulation. It is also here that the user defines the slack variables for the deficit and excess production of gas in the given zone.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Zones</p></th>
+<th class="head"><p>Cout Deficit [€/MWh]</p></th>
+<th class="head"><p>Cout Excedent [€/MWh]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NomZone1 (ex: FR)</p></td>
+<td><p>CoutDeficit1 (ex: 400)</p></td>
+<td><p>CoutExcedent1 (ex: 10)</p></td>
+</tr>
+<tr class="row-odd"><td><p>NomZone2 (ex: FR-B)</p></td>
+<td><p>CoutDeficit2 (ex: 400)</p></td>
+<td><p>CoutExcedent2 (ex: 10)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mandatory sheet</em>: ✅</p>
+<dl class="simple">
+<dt>⚙️ Zones</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the zone.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ Cout Deficit [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Value of the slack variable for the deficit (lost load).</p></li>
+<li><p><em>Default value:</em> <em>None</em> - Good practice is to set it up at 400 €/MWh.</p></li>
+<li><p><em>Default unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Cout Excedent [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Value of the slack variable for the excess (curtailment).</p></li>
+<li><p><em>Default value:</em> <em>None</em> - Good practice is to set it up at 10 €/MWh.</p></li>
+<li><p><em>Default unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition" id="target-options">
+<p class="admonition-title">Options</p>
+<p><em>Sheet description</em>: This sheet contains all the options that the user can set up for the simulation.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Option1 (ex: Ecart)</p></td>
+<td><p>Parameter (ex: Activated)</p></td>
+<td><p>Value (ex: 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Option2 (ex: LNG)</p></td>
+<td><p>Parameter (ex: Value)</p></td>
+<td><p>Value (ex: 0)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mandatory sheet</em>: ✅</p>
+<dl>
+<dt>⚙️ Option</dt><dd><ul>
+<li><p><em>Description:</em> Name of the options. Note that such options can be skipped if not useful. The list of the options available is the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ecart (Boolean): Use this option to activate the slack variables for the deficit and excess production of gas in the given zone. Note that if you don’t use it the computational time might increase a lot as the problem becomes more tight.</p></li>
+<li><p>LNG (Boolean): Use this option to activate the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module. Basically it allows to consider duration of LNG trips between LNG Nodes instead of instantaneous transfer between any LNG nodes.</p></li>
+<li><p>Monte-Carlo (Integer): Monte-Carlo simulation for the uncertainty of the demand. The number of simulations is controlled by the parameter in the code called <cite>nb_iter</cite>.</p></li>
+<li><p>SDDP (String): Use this option to activate the Stochastic Dual Dynamic Programming (<a class="reference internal" href="sddp.html"><span class="doc">SDDP</span></a>) algorithm. This option is incompatible with the Monte-Carlo and the LNG one.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ Parameter</dt><dd><ul>
+<li><p><em>Description:</em> Whether the option is <em>Activated</em> or <em>SDDP</em> specific ones. If the name of the option is <em>SDDP</em>, the user can specify different options in this field. When using SDDP algorithm, the user can select amongst those options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Simulation (Boolean): Use this option to leverage on cuts that have already been built in a previous run.</p></li>
+<li><p>Load Previous Cuts (Boolean): Load the cuts from a previous run (warm start). The algorithm will start from those cuts and build new ones on top.</p></li>
+<li><p>Cuts Number (Integer): Number of cuts to build (mandatory option when using SDDP).</p></li>
+<li><p>Max Rolling Cut Nb (Integer &gt; 0): Cap the number of cuts to keep in memory for building the additionnal ones.</p></li>
+<li><p>Workers Number (Integer, &gt;= 2): Number of workers to use for the parallelization of the cuts.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ Value</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Boolean for activation of not of the option.</p></li>
+<li><p><em>Default value:</em> 0</p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Boolean</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="note admonition" id="target-scalaire">
+<p class="admonition-title">Scalaire</p>
+<p><em>Sheet description</em>: Scalar parameters usd in the simulation.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Discount rate [% pa]</p></th>
+<th class="head"><p>Cout Ecart [€/MWh]</p></th>
+<th class="head"><p>Vessel Heel</p></th>
+<th class="head"><p>BOR Standby Laden Ship [multiplier %]</p></th>
+<th class="head"><p>Travel Max BOR [days]</p></th>
+<th class="head"><p>Standby Max BOR [days]</p></th>
+<th class="head"><p>Fixed Load Unload Time [days]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Discount rate (ex: 0.05)</p></td>
+<td><p>Cout Ecart (ex: 10 000)</p></td>
+<td><p>Vessel Heel (ex: 0.02)</p></td>
+<td><p>BOR Stand by Laden Ship (ex: 0.75)</p></td>
+<td><p>Travel Max BOR (ex: 40)</p></td>
+<td><p>Standby Max BOR (ex: 90)</p></td>
+<td><p>Fixed Load Unload Time (ex: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mandatory sheet</em>: ✅</p>
+<dl class="simple">
+<dt>⚙️ Discount rate [% pa]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Discount rate for the NPV calculation. Financial term that represent the depreciation of money <a class="reference external" href="https://en.wikipedia.org/wiki/Discounting">Discounting - Wikipedia</a>. It means that 1€ in year +1 will be equivalent to 1€/r today.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> % pa</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Cout Ecart [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Value of the slack variable for the modelling variables (does not have any business meaning).</p></li>
+<li><p><em>Default value:</em> <em>None</em> - Good practice is to set it up at 10 000 €/MWh.</p></li>
+<li><p><em>Default unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Vessel Heel</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Heel LNG is the quantity of LNG retained in the cargo to maintain their cryogenic temperatures. This parameter is used in the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module and can be left empty if not used.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ BOR Standby Laden Ship [multiplier %]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Boil-off rate (not due travel fueling), the amount of liquid that is evaporating from a cargo due to heat leakage and expressed in % of total liquid volume per unit time. This parameter is used in the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module and can be left empty if not used.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Travel Max BOR [days]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximal number of days during which vessels can travel. This parameter is used in the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module and can be left empty if not used.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> days</p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Standby Max BOR [days]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximal number of days during which vessels can be in standby. This parameter is used in the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module and can be left empty if not used.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> days</p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fixed Load Unload Time [days]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Fixed time for loading and unloading the LNG vessels. This parameter is used in the <a class="reference internal" href="shipping.html"><span class="doc">LNG Shipping</span></a> module and can be left empty if not used.</p></li>
+<li><p><em>Default value:</em> <em>None</em></p></li>
+<li><p><em>Default unit:</em> days</p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Cactus user documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demand.html" class="btn btn-neutral float-right" title="2. Demand" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

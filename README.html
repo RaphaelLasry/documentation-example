@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to add documentation? &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/layout.css?v=f294cb7b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/global_parameters.html">1. Global Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/demand.html">2. Demand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/production.html">3. Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/market.html">4. Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/lng.html">5. LNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/pipeline.html">6. Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/storage.html">7. Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/sddp.html">8. SDDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/shipping.html">9. Shipping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/time_series.html">10. Time Series</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to add documentation?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-add-documentation">
+<h1>How to add documentation?<a class="headerlink" href="#how-to-add-documentation" title="Link to this heading"></a></h1>
+</section>
+<section id="user-documentation">
+<h1>User documentation<a class="headerlink" href="#user-documentation" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">./index.rst</span></code> is the <strong>master file</strong> generating the user documentation. The documentation architecture is built from <em>toctrees</em> at the end of this file. You can define multiple toctrees.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.userDoc_conf/conf.py</span></code> is the <em>Sphinx</em> <strong>configuration file</strong>.</p></li>
+</ul>
+<p>To add documentation, you just need to:</p>
+<ol class="arabic simple">
+<li><p>(If needed) Add a new reStructuredText <em>.rst</em> files (or Markdown <em>.md</em> files) in the  <code class="docutils literal notranslate"><span class="pre">./docs</span></code> folder and in a toctree at the end of the master file.</p></li>
+<li><p>Add any content to any file.</p></li>
+<li><p>Build user or dev documentation by using the following command: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">userDoc_html</span></code></p></li>
+</ol>
+<p>You can now visualize the documentation by opening the central html file <code class="docutils literal notranslate"><span class="pre">./_build/user_html/html/index.html</span></code> in any browser.</p>
+</section>
+<section id="utils">
+<h1>Utils<a class="headerlink" href="#utils" title="Link to this heading"></a></h1>
+<p>It is possible to configure the theme even more by:</p>
+<ul class="simple">
+<li><p>activating some predefined features: https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html</p></li>
+<li><p>manually designing features in <code class="docutils literal notranslate"><span class="pre">./_static/layout.css</span></code></p></li>
+</ul>
+<p>Sphinx &amp; reStructuredText Cheatsheet</p>
+<ul class="simple">
+<li><p>https://sphinx-tutorial.readthedocs.io/cheatsheet/</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

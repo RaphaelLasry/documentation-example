@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. Time Series &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/layout.css?v=f294cb7b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="9. Shipping" href="shipping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="global_parameters.html">1. Global Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demand.html">2. Demand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="production.html">3. Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">4. Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lng.html">5. LNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline.html">6. Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">7. Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sddp.html">8. SDDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shipping.html">9. Shipping</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Time Series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-introduction">General introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-description-and-model-assumptions">Technical description and model assumptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-meters">Types of meters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assets-flows-and-capacities-contributions">Assets flows and capacities contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meters-hierarchy">Meters hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-assumptions">Main Assumptions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>Time Series</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/time_series.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="time-series">
+<h1><span class="section-number">10. </span>Time Series<a class="headerlink" href="#time-series" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-introduction" id="id1">General introduction</a></p></li>
+<li><p><a class="reference internal" href="#technical-description-and-model-assumptions" id="id2">Technical description and model assumptions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#types-of-meters" id="id3">Types of meters</a></p></li>
+<li><p><a class="reference internal" href="#assets-flows-and-capacities-contributions" id="id4">Assets flows and capacities contributions</a></p></li>
+<li><p><a class="reference internal" href="#meters-hierarchy" id="id5">Meters hierarchy</a></p></li>
+<li><p><a class="reference internal" href="#main-assumptions" id="id6">Main Assumptions</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="general-introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">General introduction</a><a class="headerlink" href="#general-introduction" title="Link to this heading"></a></h2>
+<p>The concept of meters allows users to model more advanced constraints within the model, providing greater flexibility and precision. A meter’s “raw” value acts as a counter, representing a weighted sum of model variables such as asset flows (e.g., production, consumption, buying, and selling), power capacities, and energy capacities.</p>
+<p>This raw value is typically converted into a “read” value, which matches the raw value in most cases. However, if the meter only tracks positive values, any negative raw value will result in a read value of 0.</p>
+<p>Users can apply constraints to each meter’s “read” value, including minimum and maximum limits, or incorporate meter costs into the model’s objective function. Additionally, meters can be organized hierarchically with parent (head) and child (sub) meters.</p>
+<p>In summary, meters can be used to define joint constraints across assets or to regulate flows in/out of assets based on their respective power or energy capacities.</p>
+</section>
+<section id="technical-description-and-model-assumptions">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Technical description and model assumptions</a><a class="headerlink" href="#technical-description-and-model-assumptions" title="Link to this heading"></a></h2>
+<p>This section explains how Prosumer integrates meter objects into its model. It describes the parameters available and how it impacts the refinement of the behavior of the objects modelled.</p>
+<div class="tip admonition">
+<p class="admonition-title">Prosumer’s genericity</p>
+<p>One of <strong>Prosumer’s main strengths is its versatility</strong> in accommodating diverse scenario designs. <strong>Meters further enhance this</strong> by providing additional flexibility for the user. Such feature is quite powerful and can help to represent many situations. However, it is important to keep in mind that the more complex the model, the more challenging it can be to interpret the results (especially in the case of infeasible scenarios). Therefore, it is recommended to use meters judiciously and to document their use thoroughly.</p>
+</div>
+<section id="types-of-meters">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Types of meters</a><a class="headerlink" href="#types-of-meters" title="Link to this heading"></a></h3>
+<p>Prosumer distinguishes between two types of meters:</p>
+<ul class="simple">
+<li><p><strong>Positive meters</strong> correspond to meters that only count positive values, meaning if their “read” value is the maximum between its “raw” value and 0.</p></li>
+<li><p><strong>Classic meters</strong> correspond to meters that do not only count positive values, meaning their “read” value is equivalent to their “raw” value.</p></li>
+</ul>
+<p>Note by default meters are considered as classic meters.</p>
+</section>
+<section id="assets-flows-and-capacities-contributions">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Assets flows and capacities contributions</a><a class="headerlink" href="#assets-flows-and-capacities-contributions" title="Link to this heading"></a></h3>
+<p>Each meter has a raw value that corresponds to a weighted sum of asset flows, power capacities, and energy capacities. These categories are detailed below:</p>
+<p>1) <strong>Asset flows</strong> :
+Asset <strong>flows are either the flows going “in” and “out”</strong> of assets. Each asset flow can be weighted in some meter by coefficients <span class="math notranslate nohighlight">\(\text{flow_in_weight}\)</span> and <span class="math notranslate nohighlight">\(\text{flow_out_weight}\)</span>.</p>
+<ul class="simple">
+<li><p>For <strong>assets derived from technologies</strong> (e.g. Converter, Storage, Genset, RES, Station) or <strong>markets</strong>, the flows contribution can depend on the meter, asset (defined by a technology/market name and a node), type of flow (energy vector), the year and the time block.</p></li>
+<li><p>For <strong>assets that are lines</strong>, those depend on the meter, line name, the year and the time block (lines only have one flow type).</p></li>
+</ul>
+<p>2) <strong>Asset Power Capacity</strong> :
+Asset Power Capacity are the size in power capacity of assets. Each asset power capacity can be weighted in some meter by coefficients <span class="math notranslate nohighlight">\(\text{power_weight}\)</span>.</p>
+<ul class="simple">
+<li><p>For <strong>assets derived from technologies</strong> (e.g. Converter, Storage, Genset, RES, Station) or <strong>markets</strong>, the power capacity contribution can depend on the meter, asset (defined by a technology/market name and a node) and the year.</p></li>
+<li><p>For <strong>assets that are lines</strong>, those depend on the meter, line name, the year.</p></li>
+</ul>
+<p>3) <strong>Asset Energy Capacity</strong> :
+Asset Energy Capacity are the size in energy capacity of assets that only apply to storage assets. Each storage asset energy capacity can be weighted in some meter by coefficients <span class="math notranslate nohighlight">\(\text{energy_weight}\)</span>.</p>
+<ul class="simple">
+<li><p>For <strong>storage assets</strong>, the energy capacity contribution can depend on the meter, asset (defined by a technology name and a node) and the year.</p></li>
+</ul>
+<div class="warning admonition">
+<p class="admonition-title">Warning</p>
+<p>The user can only assign <strong>energy capacity weight</strong> different than 0 to some <strong>storage asset</strong> for any meter contribution.</p>
+</div>
+<p>Each meter’s raw value is then converted in its read value and can be constrained by a minimum or maximum value, or even penalized by a cost.</p>
+<details>
+<summary><a>Example - Click to Expand</a></summary>
+<div>
+
+ For instance for some meter that has not not only positive count (read value equal to raw value), we can choose to force a \(\text{generator}\) asset to produce at most half its capacity (for some flow type, on some time block, defined for some years) using the following \(\text{meter}\) definition with minimal value of 0.
+
+
+ We will then use \(\text{power_weight} = 0.5\) and \(\text{flow_out_weight} = -1\). This gives us the constraint :
+
+     \begin{align*}
+
+     \text{read_value}(\text{meter}) &= 0.5*\text{power_capacity}(\text{generator}) -1 *\text{flow_out}(\text{generator})\\
+     0 &\le \text{read_value}(\text{meter})  \\
+     \\
+     \Leftrightarrow \text{flow_out}(\text{generator}) &\le 0.5*\text{power_capacity}(\text{generator})
+     \end{align*}
+
+ Of course you can have more advance constraints by combining multiple assets and flows on different years and time blocks in the meter definition.
+
+</div>
+</details>
+
+ <div style="margin-top: 2em;"></div><details>
+<summary><a>Mathematical summary of a meter</a></summary>
+<div>
+
+ The concept of meters is quite generic and can be summarized mathematically as follows. Let's consider a meter \(\text{meter}\) with a raw value \(\text{raw_value}(\text{meter})\) that is a weighted sum of asset flows, power capacities, and energy capacities. The read value \(\text{read_value}(\text{meter})\) is then defined as :
+
+     \begin{align*}
+         \text{read_value}(\text{meter}) &= \sum_{\text{asset}} \sum_{\text{flow}} \sum_{\text{year}} \sum_{\text{time block}} \text{flow_weight}(\text{asset}, \text{flow}, \text{year}, \text{time block}) \times \text{flow}(\text{asset}, \text{flow}, \text{year}, \text{time block}) \\
+         &+ \sum_{\text{asset}} \sum_{\text{year}} \text{power_weight}(\text{asset}, \text{year}) \times \text{power_capacity}(\text{asset}, \text{year}) \\
+         &+ \sum_{\text{asset}} \sum_{\text{year}} \text{energy_weight}(\text{asset}, \text{year}) \times \text{energy_capacity}(\text{asset}, \text{year})
+     \end{align*}
+
+</div>
+</details>
+
+ <div style="margin-top: 2em;"></div></section>
+<section id="meters-hierarchy">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Meters hierarchy</a><a class="headerlink" href="#meters-hierarchy" title="Link to this heading"></a></h3>
+<p>In Prosumer, it is possible to define a hierarchy between meters. This means that a meter can be a head meter and have sub meters contributing to its value.</p>
+<p>More concretely, if <span class="math notranslate nohighlight">\(\text{head_meter}\)</span> is the head meter and has <span class="math notranslate nohighlight">\(\text{sub_meter_}i\)</span> as its <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> sub meter, then <span class="math notranslate nohighlight">\(\text{head_meter}\)</span> raw value is given by :</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+\text{raw_value}(\text{head_meter}) = \sum_{i} \;\; \text{sub_meter_weight_}i*\text{raw_value}(\text{sub_meter_}i)
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{sub_meter_weight_}i\)</span> is the weight of the <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> sub meter associated to the head meter. Note there are hidden indices in this sum like <span class="math notranslate nohighlight">\(\text{years}\)</span> and <span class="math notranslate nohighlight">\(\text{time blocks}\)</span> that enable using only sub meter values for specific years and time blocks in the head meter contribution.</p>
+<p>There is also a possibility to add a minimum and maximum share constraint in <span class="math notranslate nohighlight">\([\%]\)</span> for each sub meter contribution.</p>
+<details>
+<summary><a>Example - Click to Expand</a></summary>
+<div>
+
+ Assume all following meters are classic (not positive). For instance if two sub meters representing the quantity of \(\text{H}_2\) from source 1 and source 2 must add up to total \(\text{H}_2\) production representing head meter value, we can choose for example that first source is bounded between \(\text{min_share}=0\%\) and \(\text{max_share}=\alpha\%\), and source 2 between \(\text{min_share}=\beta\%\) and \(\text{max_share}=100\%\) of total \(\text{H}_2\) production. Which in mathematics states as:
+
+     \begin{align*}
+     \text{read_value}(\text{head_meter}) &= \text{read_value}(\text{sub_meter_source1}) + \text{read_value}(\text{sub_meter_source2}) \\
+     0 &\le \text{read_value}(\text{sub_meter_source1}) \le \alpha/100*\text{read_value}(\text{head_meter})\\
+     \beta/100*\text{read_value}(\text{head_meter}) &\le \text{read_value}(\text{sub_meter_source2}) \le 1
+     \end{align*}
+
+ Note there are also hidden indices in these constraints like \(\text{years}\) and \(\text{time blocks}\) that enable share constraints only for specific years and time blocks.
+
+</div>
+</details><div style="margin-top: 2em;"></div></section>
+<section id="main-assumptions">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Main Assumptions</a><a class="headerlink" href="#main-assumptions" title="Link to this heading"></a></h3>
+<p>Here are the main assumptions of meters :</p>
+<ul class="simple">
+<li><p>Any asset type can contribute to a meter, <strong>except for assets of the “vehicle” type</strong>, which are not considered in meters. Therefore, meters can be applied to converters, gensets, RES, storages, stations, and lines.</p></li>
+<li><p>Only <strong>storage assets</strong> have an energy capacity contribution, while all other assets contribute through power capacity and flow (in/out).</p></li>
+<li><p>Meter values can account for both <strong>energy ([kWh]) and power ([kW]) contributions</strong>, which means mathematically we will compare [kW] with [kWh].</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>The energy and power capacity contributions can be mixed in a mathematical sense at any time block as those capacities are constant during the year.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="shipping.html" class="btn btn-neutral float-left" title="9. Shipping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Dec 31, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
