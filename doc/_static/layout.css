@@ -20,6 +20,22 @@ Add any additional styles here
     border-left: 7px solid #2980B9;
 }
 
+.admonition.tip .admonition-title::before {
+    content: "💡 "; /* Light bulb icon for tips */
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: -5px;
+    vertical-align: middle;
+    font-size: 1.7em;
+}
+
+.admonition.tip .admonition-title {
+    vertical-align: middle;
+    font-size: 1.2em;
+    border: 2px solid #2ECC71; /* Green border for tips */
+    border-left: 7px solid #2ECC71;
+}
+
 /* Show content on full html page */
 .wy-nav-content {
     max-width: none;
