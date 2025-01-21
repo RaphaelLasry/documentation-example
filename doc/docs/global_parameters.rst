@@ -10,11 +10,10 @@ Global Parameters
 Excel input sheets
 ------------------
 
-
 .. _target_periods:
 
 .. admonition:: Horizon
-    :class: note
+    :class: error
 
     *Sheet description*: Definition of the periods of the optimization horizon.
 
@@ -27,12 +26,14 @@ Excel input sheets
           - Pointe (1)
         * - Index1 (ex: 1)
           - Date1 (ex: 01/01/2020)
-          - BooleanPointe1 (ex: 0)
+          - BooleanPeak1 (ex: 0)
         * - Index2 (ex: 2)
           - Date2 (ex: 01/02/2020)
-          - BooleanPointe2 (ex: 1)
+          - BooleanPeak2 (ex: 1)
 
     *Mandatory sheet*: ✅
+
+.. _horizon:
 
     ⚙️ Periode
         * *Description:* Unique index for the period.
@@ -55,7 +56,7 @@ Excel input sheets
 .. _target_zones:
 
 .. admonition:: Zones
-    :class: note
+    :class: error
 
     *Sheet description*: Topology of the simulation. The user can define all the zones (country, region or even virtual location) that will be used in the simulation. It is also here that the user defines the slack variables for the deficit and excess production of gas in the given zone.
 
@@ -66,14 +67,16 @@ Excel input sheets
         * - Zones
           - Cout Deficit [€/MWh]
           - Cout Excedent [€/MWh]
-        * - NomZone1 (ex: FR)
-          - CoutDeficit1 (ex: 400)
-          - CoutExcedent1 (ex: 10)
-        * - NomZone2 (ex: FR-B)
-          - CoutDeficit2 (ex: 400)
-          - CoutExcedent2 (ex: 10)
+        * - ZoneName1 (ex: FR)
+          - DeficitCost1 (ex: 400)
+          - ExcessCout1 (ex: 10)
+        * - ZoneName2 (ex: FR-B)
+          - DeficitCost2 (ex: 400)
+          - ExcessCost2 (ex: 10)
 
     *Mandatory sheet*: ✅
+
+.. _zones:
 
     ⚙️ Zones
         * *Description:* Name of the zone.
@@ -96,7 +99,7 @@ Excel input sheets
 .. _target_options:
 
 .. admonition:: Options
-    :class: note
+    :class: error
 
     *Sheet description*: This sheet contains all the options that the user can set up for the simulation.
 
@@ -115,6 +118,8 @@ Excel input sheets
           - Value (ex: 0)
 
     *Mandatory sheet*: ✅
+
+.. _options:
 
     ⚙️ Option
         * *Description:* Name of the options. Note that such options can be skipped if not useful. The list of the options available is the following:
@@ -150,7 +155,7 @@ Excel input sheets
 .. _target_scalaire:
 
 .. admonition:: Scalaire
-    :class: note
+    :class: error
 
     *Sheet description*: Scalar parameters usd in the simulation.
 
@@ -166,7 +171,7 @@ Excel input sheets
           - Standby Max BOR [days]
           - Fixed Load Unload Time [days]
         * - Discount rate (ex: 0.05)
-          - Cout Ecart (ex: 10 000)
+          - Slack Cost (ex: 10 000)
           - Vessel Heel (ex: 0.02)
           - BOR Stand by Laden Ship (ex: 0.75)
           - Travel Max BOR (ex: 40)
@@ -174,6 +179,8 @@ Excel input sheets
           - Fixed Load Unload Time (ex: 1)
 
     *Mandatory sheet*: ✅
+
+.. _scalaire:
 
     ⚙️ Discount rate [% pa]
         * *Description:* Discount rate for the NPV calculation. Financial term that represent the depreciation of money `Discounting - Wikipedia <https://en.wikipedia.org/wiki/Discounting>`_. It means that 1€ in year +1 will be equivalent to 1€/r today.

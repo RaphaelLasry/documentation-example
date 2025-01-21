@@ -2,24 +2,23 @@
 Add any additional styles here
 */
 
-/* Add a custom 'sheet' icon to the note admonition */
-.admonition.note .admonition-title::before {
-    content: "📄 ";
+/* Add a custom icons to admonitions */
+.admonition.error .admonition-title::before {
+    content: "📄 "; /* Document icon for errors because used for sheet's documentation*/
     display: inline-block;
     margin-right: 5px;
     margin-left: -5px;
     vertical-align: middle;
     font-size: 1.7em;
 }
-
-/* Add a border to the note admonition and tune font-size*/
-.admonition.note .admonition-title{
+.admonition.note .admonition-title::before {
+    content: "🔎 "; /* Paperclip icon for notes */
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: -5px;
     vertical-align: middle;
-    font-size: 1.2em;
-    border: 2px solid #2980B9; /* Add a border with desired color */
-    border-left: 7px solid #2980B9;
+    font-size: 1.7em;
 }
-
 .admonition.tip .admonition-title::before {
     content: "💡 "; /* Light bulb icon for tips */
     display: inline-block;
@@ -28,12 +27,40 @@ Add any additional styles here
     vertical-align: middle;
     font-size: 1.7em;
 }
+.admonition.warning .admonition-title::before {
+    content: "📣 "; /* Attention mark for warnings ❕📢❗🔔🔊*/
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: -5px;
+    vertical-align: middle;
+    font-size: 1.7em;
+}
 
-.admonition.tip .admonition-title {
+/* Add a border to admonitions (and tune their font-size)*/
+.admonition.error .admonition-title{
     vertical-align: middle;
     font-size: 1.2em;
-    border: 2px solid #2ECC71; /* Green border for tips */
-    border-left: 7px solid #2ECC71;
+    border: 2px solid #4DA5B1;
+    border-left: 7px solid #4DA5B1;
+    background-color: #4DA5B1;
+}
+.admonition.note .admonition-title{
+    vertical-align: middle;
+    border: 2px solid #469CD6;
+    border-left: 7px solid #469CD6;
+    background-color: #469CD6;
+}
+.admonition.tip .admonition-title {
+    vertical-align: middle;
+    border: 2px solid #18AC90;
+    border-left: 7px solid #18AC90;
+    background-color: #18AC90;
+}
+.admonition.warning .admonition-title {
+    vertical-align: middle;
+    border: 2px solid #E37A1B;
+    border-left: 7px solid #E37A1B;
+    background-color: #E37A1B;
 }
 
 /* Show content on full html page */
@@ -41,8 +68,24 @@ Add any additional styles here
     max-width: none;
 }
 
+/* Distribute text evenly between margins */
 body {
     text-align: justify;
+}
+
+/* Add margin after images */
+img {
+    margin-bottom: 25px !important;
+}
+
+/* Add spacing between list items */
+ul li, ol li {
+  margin-bottom: 7px;
+}
+
+/* Enables underlined text. Use :underline:`(underlined text)` */
+.underline {
+  text-decoration: underline;
 }
 
 /* Can be used to change the font of the math equations */

@@ -3,6 +3,11 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 import os
+import sys
+
+
+sys.path.insert(0, os.path.abspath("_static"))  # Add the root directory to the path
+from custom_directives import setup_custom_directives
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -23,6 +28,16 @@ extensions = [
 
 master_doc = "index"  # The master toctree document
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+mathjax3_config = {
+    "tex": {
+        "inlineMath": [["$", "$"], ["\\(", "\\)"]],  # Allow $...$ for inline math
+        "displayMath": [["$$", "$$"], ["\\[", "\\]"]],  # Allow $$...$$ for display math
+    }
+}
+
+# setup function
+def setup(app):
+    setup_custom_directives(app)  # Add custom directive
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
