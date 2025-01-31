@@ -40,17 +40,9 @@ Cactus helps you optimize the dispatch of the gas in the world and operate the s
 .. toctree::
     :caption: Module's documentation
     :maxdepth: 2
-    :numbered: 1
     :hidden:
 
-    docs/global_parameters
-    docs/demand
-    docs/production
-    docs/market
-    docs/lng
-    docs/pipeline
-    docs/storage
-    docs/sddp
-    docs/shipping
-    docs/time_series
-
+    docs/installation/index
+    docs/model/index
+    docs/output/index
+    
