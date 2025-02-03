@@ -116,11 +116,11 @@ Excel input sheets
         * *Default unit:* €/MWh
         * *Validity:* Float.
 
-.. _target_capa_tl_par_date:
-.. admonition:: CapaTLParDate
+.. _target_capa_lique_par_date:
+.. admonition:: CapaLiqueParDate
     :class: error
 
-    *Sheet Description*: This sheet is used to serialize the capacity of the TL for each date.
+    *Sheet Description*: This sheet is used to serialize the capacity of the Liquefaction Terminal for each date.
 
     .. list-table::
         :widths: 25 25 25 25
