@@ -1,10 +1,8 @@
 :orphan:  .. NOT DELETE: Avoid warning about document not being included in any toctree
 
-Shipping
-========
+Visualization
+=========
 
 .. contents::
-    :depth: 2
+    :depth: 3
     :local:
-
-

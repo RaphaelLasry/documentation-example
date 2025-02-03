@@ -10,6 +10,9 @@ Production
 Excel input sheets
 ------------------
 
+Gas supply
+^^^^^^^^^^
+
 .. _target_appros:
 .. admonition:: Appros
     :class: error
@@ -123,6 +126,9 @@ Excel input sheets
         * *Default unit:* *None*
         * *Validity:* String. Must be part of the connection points defined in the :ref:`PIR<target_pir>`, :ref:`PTM<target_ptm>` or :ref:`TM<target_tm>` sheets.
 
+Gas fields
+^^^^^^^^^^
+
 .. _target_perimetres_production:
 .. admonition:: PerimetresProd
     :class: error
@@ -162,8 +168,9 @@ Excel input sheets
     *Sheet Description*: This sheet controls the fields. Each field is defined by its name, the production area, the connection point, the minimum and maximum daily contract quantity, the initial and maximum developed reserves, the development and dismantling CAPEX, the variable and fixed OPEX, the discounted cost of residual developed capacity and the residual gas NPV. It's another way of modelling gas supply. Here the goal is to represent the physical gas plant as well as the quantity available in such a plant.
 
     .. list-table::
-        :widths: 25 25 25 25 25 25 25 25
+        :widths: 25 25 25 25 25 25 25 25 25 25 25 25 25 25 25 
         :header-rows: 1
+
         * - Champ
           - Périmètre de production
           - PIR de raccordement
@@ -244,7 +251,7 @@ Excel input sheets
     ⚙️ Réserves développées initiales [MWh]
         * *Description:* Initial developed reserves of the field.
         * *Default value:* *None*
-        * *Default unit
+        * *Default unit:* MWh
         * *Validity:* Float
 
     ⚙️ Réserves développées max [MWh]
@@ -296,7 +303,7 @@ Excel input sheets
     *Sheet Description*: This sheet controls the production constraints. Each constraint is defined by its name, the origin level and the slope for the evolution of the gas in the field. It allows the user to define the evolution of the gas in the field.
 
     .. list-table::
-        :widths: 25 25 25 25 25
+        :widths: 25 25 25
         :header-rows: 1
 
         * - Champ
