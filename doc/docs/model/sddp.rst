@@ -193,7 +193,7 @@ See the :ref:`Options<target_options>` tab in the excel input file for the SDDP 
 
 **SDDP in Python**
 
-To manage the SDDP algorithm with Python, a class named `CactusSDDPOptim` has been created in the script *couches/sddp/cactus_sddp_optim.py*. This class aims at managing the data workflow all along the algorithm process. It uses the GUSS facility in GAMS (see `the description here<https://www.gams.com/mccarlGuide/guss.htm>`). The idea behind GUSS facility is to run a same optimization, by changing only several parameters. In the SDDP algorithm, we always run the same optimization made of one unique period that can vary, and thus with varying parameters for the model. Indeed, all the parameters depending on time will vary depending on the considered period, and demand parameter will also vary depending on the scenario considered.
+To manage the SDDP algorithm with Python, a class named `CactusSDDPOptim` has been created in the script *couches/sddp/cactus_sddp_optim.py*. This class aims at managing the data workflow all along the algorithm process. It uses the GUSS facility in GAMS (see `the description here <https://www.gams.com/mccarlGuide/guss.htm>`_). The idea behind GUSS facility is to run a same optimization, by changing only several parameters. In the SDDP algorithm, we always run the same optimization made of one unique period that can vary, and thus with varying parameters for the model. Indeed, all the parameters depending on time will vary depending on the considered period, and demand parameter will also vary depending on the scenario considered.
 
 The main method of this class is the `SDDP_run` method, launching all the steps of the algorithm.
 
@@ -283,6 +283,8 @@ Excel input sheets
           - EU (eg: 1.05)
           - FR (eg: 0.95)
           - ...
+
+    *Mandatory sheet*: ❌ (mandatory if the model is stochastic)
 
 .. _scenario_demand_coeff:
 

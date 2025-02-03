@@ -207,6 +207,8 @@ Excel input sheets
           - Daily seasonal factor output November (ex: 1)
           - Daily seasonal factor output December (ex: 1)
 
+    *Mandatory sheet*: ❌
+
 .. _pir:
 
     ⚙️ Nom
@@ -792,6 +794,8 @@ Excel input sheets
           - Capacity tariff [€/MWh/d] (eg: 0.1)
           - % Fuel gas [0;100] (eg: 1.8) 
 
+    *Mandatory sheet*: ❌
+
 .. _laison:
 
     ⚙️ Liaison
@@ -853,6 +857,8 @@ Excel input sheets
           - Start PIR (eg: LBTG | OPAL | Exit to Gaspool)
           - End PIR (eg: GASCADE | DE-GPL | Entry from OPAL)
 
+    *Mandatory sheet*: ❌
+
 .. _interconnexion:
 
     ⚙️ Nom
@@ -893,6 +899,8 @@ Excel input sheets
           - Start (eg: 16/07/2019)
           - End (eg: 29/07/2019)
           - Remaining capacity [MWh/d] (eg: 0) 
+
+    *Mandatory sheet*: ❌
 
 .. _maintenance_transport:
 

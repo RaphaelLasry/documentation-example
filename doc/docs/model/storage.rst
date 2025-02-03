@@ -50,6 +50,8 @@ Gas storage
           - Injection level (0,1) (eg: 1)
           - Withdrawal level (0,1) (eg: 1)
 
+    *Mandatory sheet*: ❌
+
 .. _ats:
 
     ⚙️ Pays
@@ -319,6 +321,8 @@ Gas storage
           - Daily seasonal factor exit October (eg: 1)
           - Daily seasonal factor exit November (eg: 1)
           - Daily seasonal factor exit December (eg: 1)
+
+    *Mandatory sheet*: ❌
 
 .. _pits:
 
@@ -895,6 +899,8 @@ Gas storage
         * - Gas Account (eg: astora - Haidach | DE-NCG | Haidach)
           - PITS (eg: bayernets | DE-NCG | Haidach)
 
+    *Mandatory sheet*: ❌
+
 .. _raccordements_pits:
 
     ⚙️ CompteGaz
@@ -923,6 +929,8 @@ Gas storage
           - NomStockage
         * - Gas Account (eg: astora - Haidach | DE-NCG)
           - Storage Name (eg: astora - Haidach)
+
+    *Mandatory sheet*: ❌
 
 .. _comptes_gaz:
 
@@ -956,6 +964,8 @@ Gas storage
           - Gas Account Emitter (eg: astora - Jemgum | DE-GPL)
           - Gas Account Receiver (eg: astora - Jemgum | NL)
           - Transfer tariff (eg: 0.30)
+
+    *Mandatory sheet*: ❌
 
 .. _transferts_comptes_gaz:
 
@@ -996,7 +1006,9 @@ Gas storage
         * - Stockage
           - Niveau final [0..100]
         * - Storage (eg: astora - Haidach)
-          - Final level (eg: 100) 
+          - Final level (eg: 100)
+
+    *Mandatory sheet*: ❌ 
 
 .. _remplissage_stockage_final:
 
@@ -1033,6 +1045,8 @@ Gas storage
           - Start (eg: 4/8/2019)
           - End (eg: 4/14/2019)
           - Remaining capacity (eg: 193,848)
+
+    *Mandatory sheet*: ❌
 
 .. _maintenance_stockage:
 
@@ -1090,6 +1104,8 @@ Storage constraints used in CATS algorithm
           - Tunnel Min (eg: 0)
           - Tunnel Max (eg: 0.4)
 
+    *Mandatory sheet*: ❌
+
 .. _tunnel_par_date:
 
     ⚙️ NomStockage
@@ -1134,6 +1150,8 @@ Storage constraints used in CATS algorithm
           - Direction (eg: Injection)
           - Level (eg: 0)
           - Factor (eg: 1)  
+
+    *Mandatory sheet*: ❌
 
 .. _facteurs_reduction:
 
