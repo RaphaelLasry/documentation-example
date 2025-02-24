@@ -13,49 +13,34 @@ Demand
 General introduction
 --------------------
 
-The demand module is used to define the load of each region. The demand is defined by zones and can be of different types. It can be defined in three different sheets, which correspond to different constraints added to the model:
+The demand models are used to define the load of each zone. Three different demand models are currently available in Cactus :
 
-     - `DemandeNormale`: it correspond to the load that :underline:`must` be satisfy by the system,
-     - `DemandeInter`: it correspond to the load that :underline:`could` be met. Indeed, here there is a tradeoff between meeting the demand of paying the fee to not meet the requirement,
-     - `DemandeTransit`: it allows the user to shift a demand from one PIR to another. **This module is depreciated and the model is not instantiated by this sheet.**
+     - `Uninterruptible demand (DemandeNormale)`: it corresponds to the load that must be satisfied by the system,
+     - `Interruptible demand (DemandeInter)`: it corresponds to the load that can be shedded at a given price.
+     - `Demand shift (DemandeTransit)`: it allows the user to shift a demand from one PIR to another. **This model is deprecated and the model is not instantiated by this sheet.**
+
+In the global picture of the object available in Cactus we'll focus on the following ones:
+
+.. image:: drawio/Demand/Diagram_1.png
+    :alt: Focus on Demand
+    :align: center
 
 Technical description and model assumptions
 -------------------------------------------
 
-The demand that is passed by the user on the sheet `DemandeNormale` is read by the pre-processing script, transformed into a GAMS parameter called `ClientNormalDemande` and is then summed over the zone to create the parameter `Demande(z, p)`. The meeting of the demand is presented in the model as a balance equation between the inflows and outflows at a given nodal zone. Here is a simple representation of the balance equation for a given zone `z` and a given period `p`:
+Demand satisfaction (for uninterruptible and interruptible demands) is included in the model in the balance equation between inflows and outflows for a given zone and period:
 
+.. math:: \text{Outflow} = \text{Demand} + \text{Demand Inter} - \text{Effacement} + \ldots
 
-**Zone Balance Equation**
+Where,
 
-This equation ensures that the total inflow and outflow of resources in a zone are balanced. Here's a breakdown of the main components:
+     - **Demand** is the uninterruptible demand value defined in the DemandeNormale sheet
+     - **Demand Inter** is the interruptible demand value defined in the DemandeInter sheet. 
+     - The **Effacement** variable is bounded by the **Demand Inter** parameter, and penalized in the objective function by the parameter `ClientInterruptiblePrixEffacement`: 
 
-1. **Inflow Components:**
-     - **PIR, PITS, PTM, Marche, and Liaison Aval:** These terms represent the quantities entering the zone from various sources like PIR, PITS, PTM, Marche, and Liaison Aval.
+.. math:: ObjFunction += \text{Effacement} \times \text{ClientInterruptiblePrixEffacement}
 
-.. math:: \text{Inflow} = \sum (\text{PIR}) + \sum (\text{PITS}) + \sum (\text{PTM}) + \sum (\text{Marche}) + \sum (\text{Liaison Aval})
-
-2. **Outflow Components:**
-     - **PIR, PITS:** Quantities exiting the zone.
-     - **Demand:** The demand in the zone, including technical consumption.
-     - **Technical Consumption in Regas Plants (PTM, TM, Liaison):** Adjustments for fuel used in regasification plants.
-     - **Demand Inter:** Additional demand in the zone ...
-     - **Effacement:** ... That could be shut down partially.
-     - **Technical Consumption in Pipes:** Fuel used in pipelines, split between upstream and downstream zones.
-     - **PITL:** Quantities used for the liquefaction plants.
-
-.. math:: \text{Outflow} = \sum (\text{PIR}) + \sum (\text{PITS}) + \text{Demand} + \text{Technical Consumption} + \text{Demand Inter} - \text{Effacement} + \sum (\text{Pipes}) + \text{PITL}
-
-3. **Slack:**
-     - **EcartActif:** Slacks based on active discrepancies in demand.
-
-.. math:: \text{Adjustment} = \text{EcartActif} \times (\text{eZonePlus} - \text{eZoneMoins}) \times (\text{Demand} > 0)
-
-**Overall Balance Equation:**
-
-.. math::
-    Inflow = Outflow + Slacks
-
-For a more detailed view, the user can look at the equation `CtrBilanZone(z,p)` in the ModeleGAMS.gms file.
+For a more detailed view of the balance equation at the zone level, the user can look at the documentation of :ref:`Zone<target_model_overview_module>` model, and at the equation `CtrBilanZone(z, p)` in the ModeleGAMS.gms file.
 
 Excel input sheets
 ------------------
@@ -64,7 +49,7 @@ Excel input sheets
 .. admonition:: DemandeNormale
     :class: error
 
-    *Sheet description*: This sheet controls the global **daily** demand by zone on each time period. This sheet is dynamic in a sense that you must add the periods define in your use case as columns.
+    *Sheet description*: Definition of the **daily** non interruptible demand by zone on each time period. This sheet is dynamic in the sense that you must add the periods defined in your model as columns.
 
     .. list-table::
         :widths: 25 25 25 25 25
@@ -75,44 +60,30 @@ Excel input sheets
           - Periode1
           - Periode2
           - ...
-        * - DemandName1
-          - ZoneName1
-          - Value11
-          - Value21
+        * - DemandName1 (e.g: BA)
+          - ZoneName1 (e.g: BA)
+          - 01/01/2020 (e.g: 12,032)
+          - 01/02/2020 (e.g: 10,000)
           - ...
-        * - DemandName2
-          - ZoneName2
-          - Value12
-          - Value22
-          - ...
-
-    *Mandatory sheet*: ❌
-
-.. _demand_normale:
 
     ⚙️ Nom
-        * *Description:* Unique name of the demand. It could be also the same name of the zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Description:* Unique name of the demand. Can also use the same name as the zone.
         * *Validity:* String
 
     ⚙️ Zone
-        * *Description:* Name of a zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
-        * *Validity:* String. Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
+        * *Description:* Name of the zone where the demand is located.
+        * *Validity:* Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
 
     ⚙️ Periode1, Periode2, ...
         * *Description:* Demand value for each period. Warning, this demand is in MWh/day and will be multiplied by the number of days in the period.
-        * *Default value:* 0
-        * *Default unit:* MWh/day
-        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit:* MWh/day
+        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
 .. _target_demand_inter:
 .. admonition:: DemandeInter
     :class: error
 
-    *Sheet description*: This sheet controls the global **daily** interruptive demand by zone on each time period. This sheet is dynamic in a sense that you must add the periods define in your use case as columns.
+    *Sheet description*: Definition of the **daily** interruptible demand by zone on each time period. This sheet is dynamic in the sense that you must add the periods defined in your model as columns.
 
     .. list-table::
         :widths: 25 25 25 25 25 25
@@ -124,55 +95,38 @@ Excel input sheets
           - Periode1
           - Periode2
           - ...
-        * - Flag1
-          - DemandName1
-          - NomZone1
-          - Value11
-          - Value21
+        * - Flag1 (e.g: Prix Inter Reel)
+          - DemandName1 (e.g: FR_CSP_G47_C44)
+          - NomZone1 (e.g: FR)
+          - 01/01/2020 (e.g: 13.19)
+          - 01/02/2020 (e.g: 13.28)
           - ...
-        * - Flag2
-          - DemandName2
-          - NomZone2
-          - Value12
-          - Value22
-          - ...
-
-    *Mandatory sheet*: ❌
-
-.. _demand_inter:
 
     ⚙️ Entete
-        * *Description:* String to define the nature of the series. It must be part of the list:
+        * *Description:* Each interruptible demand object is defined by a set of two timeseries : the demand itself, and an interruption price series. This field is used to define to which parameter the timeseries defined in the next columns corresponds to:
             * Demande Inter
             * Prix Inter Optim
-            * Prix Inter Reel
-        * *Default value:* *None*
-        * *Default unit:* *None*
+            * Prix Inter Reel (Not used anymore, but can be found in old dataset)
         * *Validity:* String
 
     ⚙️ Nom
-        * *Description:* Unique name of the demand. The couple (Entete, Nom) must be unique.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Description:* Unique name of the demand object.
         * *Validity:* String
 
     ⚙️ Zone
-        * *Description:* Name of a zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Description:* Name of the zone where the demand is located.
         * *Validity:* Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
 
     ⚙️ Periode1, Periode2, ...
         * *Description:* Demand value for each period. Warning, this demand is in MWh/day and will be multiplied by the number of days in the period.
-        * *Default value:* 0
-        * *Default unit:* MWh/day
-        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit:* MWh/day
+        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
 .. _target_demand_transit:
-.. admonition:: DemandeTransit - DEPRECIATED
+.. admonition:: DemandeTransit - DEPRECATED
     :class: error
 
-    *Sheet description*: This sheet controls the global **daily** demand that can be offset from one PIR to another by period. This sheet is dynamic in a sense that you must add the periods define in your use case as columns. Please note that this module is depreciated and has not been used for a long time.
+    *Sheet description*: This sheet controls the global **daily** demand that can be shifted from one PIR to another by period. This sheet is dynamic in the sense that you must add the periods defined in your model as columns. Please note that this model is deprecated and the equations generated and associated results should be double checked before any analysis.
 
     .. list-table::
         :widths: 25 25 25 25 25 25
@@ -190,38 +144,22 @@ Excel input sheets
           - Value11
           - Value21
           - ...
-        * - Name2 
-          - UpstreamPIR2
-          - DownstreamPIR2
-          - Value12
-          - Value22
-          - ...
 
-    *Mandatory sheet*: ❌
-
-.. _demand_transit:
 
     ⚙️ Nom
         * *Description:* Unique name of the demand.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* String
 
     ⚙️ PIR Amont
         * *Description:* Name of the upstream PIR.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* String. The PIR must be defined in the :ref:`PIR<target_pir>` sheet.
 
     ⚙️ PIR Aval
         * *Description:* Name of the downstream PIR.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* String. The PIR must be defined in the :ref:`PIR<target_pir>` sheet.
 
     ⚙️ Periode1, Periode2, ...
         * *Description:* Demand value for each period. Warning, this demand is in MWh/day and will be multiplied by the number of days in the period.
-        * *Default value:* 0
-        * *Default unit:* MWh/day
-        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit:* MWh/day
+        * *Validity:* Float. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 

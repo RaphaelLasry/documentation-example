@@ -7,6 +7,77 @@ Pipelines
     :depth: 2
     :local:
 
+General introduction
+--------------------
+
+This module is used to define the interconnections of the network. It is central one as it's used to model the pipes and the links with the zones. It defines the way the gas flows between regions (aside from the one that is transported by ships).
+Once produced, the gas can either be liquefied and then be transported by ships (it will be re-liquefied later on), or directly be injected in the network. Here we'll describe the latter case, for the former one, check the :ref:`LNG<target_lng_module>` module.
+
+Once the flow is produced (see the Production module), it needs to be injected into the system. To do so, the gas is injected through the PIR. Here is a simplistic view of the process:
+
+.. image:: drawio/Pipelines/Diagram_1.png
+    :alt: Flow
+    :align: center
+
+Everything that is located in the dotted line belongs to a zone. Hence, when there are some exchanges between zones it goes through the following process:
+
+.. image:: drawio/Pipelines/Diagram_2.png
+    :alt: Flow
+    :align: center
+
+Indeed, the :ref:`Interconnexion<target_interconnexion>` sheet is used to model the pipe that goes from one PIR to another. It is also possible to use the :ref:`Liaison<target_liaison>` sheet to model the link between two zones. The main difference between the two is that the *liaison* has a capacity that is limited, while the *interco* is not (but could be set on the PIR).
+
+.. image:: drawio/Pipelines/Diagram_3.png
+    :alt: Flow
+    :align: center
+
+In the global picture of the object available in Cactus we'll focus on the following ones:
+
+.. image:: drawio/Pipelines/Diagram_4.png
+    :alt: Focus on Pipelines
+    :align: center
+
+Technical description and model assumptions
+-------------------------------------------
+
+Just as presented above, the transport of gas via the land needs two part to be modelled. The first one being the pipe in itself (it can either be a *liaison* or an *interco*), and the second one being the PIR. The PIR should be seen as a virtual object that allow to link the pipe to the rest of the zone.
+
+As described above, the *interconnection* object is very simple, it's simply a link between two *PIR*. Its contribution in the model only appears in the equation `CtrBilanPIREntree`:
+
+.. _target_ctr_bilan_pir_entree:
+.. math:: 
+    \begin{align*}
+        \text{PIR in} &= \sum \text{Prod (Appro)} \\
+                      &+ \sum \text{Prod (Fields)} \\
+                      &+ \sum \text{Markets} \\
+                      &+ \sum \text{Interco in} \times \text{Efficiency} \\
+    \end{align*}
+
+The `CtrBilanPIRSortie` is even simpler:
+
+.. math:: \text{PIR out} = \sum \text{Interco out} \times \text{Efficiency}
+
+The *liaison* object is a bit more complex as it has a capacity that is limited. The model will have to size the *liaison* with an associate cost (so it will impact the Objective Function), and the flow that goes through the *liaison* will be also associate with a fee. Then, it bypass the PIR and is then directly involved in the balance of the zone (`CtrBilanZone`) for both what goes in an out of a zone. Finally, there are two global equations about what goes in and out of this object:
+
+.. math:: \text{Liaison out} = \text{Liaison in} \times \text{Efficiency}
+
+And for the capacity:
+
+.. math:: \text{Liaison out} \leq \text{Capacity}
+
+Now finally, the PIR is a central object, where both what goes in and out of it are involved in the `CtrBilanZone` main equation. on top of that, the capacity of the in and out flows are subject to an optimization (part of it is already available via the *souscrite* capa and part of it can be increased via the *dispo* one). Note also that it is accounted in the Objective Function with the associated cost:
+
+.. math:: 
+    \begin{align*}
+        ObjFunction +&= \text{Capa PIR in} \times \text{Tarif in} \\
+                     &+ \text{Capa PIR out} \times \text{Tarif out} 
+                     &+ \text{Qte PIR in} \times \text{Tarif in} \\
+                     &+ \text{Qte PIR out} \times \text{Tarif out} \\
+                     &+ \text{Capa Liaison in} \times \text{Tarif in} \\
+                     &+ \text{Qte Liaison in} \times \text{Tarif in} \\
+    \end{align*}
+
+
 Excel input sheets
 ------------------
 
@@ -207,569 +278,455 @@ Excel input sheets
           - Daily seasonal factor output November (ex: 1)
           - Daily seasonal factor output December (ex: 1)
 
-    *Mandatory sheet*: ❌
-
-.. _pir:
-
     ⚙️ Nom
         * *Description:* Unique name of the PIR.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String
 
     ⚙️ Zone
         * *Description:* Name of a zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
 
     ⚙️ Capacité souscrite en entrée [MWh/j]
         * *Description:* Subscribed capacity in input.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`CapaParPdt<target_capa_par_pdt>` sheet.
 
     ⚙️ Capacité dispo en entrée [MWh/j]
         * *Description:* Capacity available in input.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`CapaParPdt<target_capa_par_pdt>` sheet.
 
     ⚙️ Capacité souscrite en sortie [MWh/j]
         * *Description:* Subscribed capacity in output.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`CapaParPdt<target_capa_par_pdt>` sheet.
 
     ⚙️ Capacité dispo en sortie [MWh/j]
         * *Description:* Capacity available in output.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`CapaParPdt<target_capa_par_pdt>` sheet.
 
     ⚙️ Part de la capacité d'entrée à mettre de côté pour le court terme [%]
         * *Description:* Percentage of input capacity reserved for short term.
-        * *Default value:* *None*
-        * *Default unit:* %
+        * *Unit:* %
         * *Validity:* Float
 
     ⚙️ Part de la capacité de sortie à mettre de côté pour le court terme [%]
         * *Description:* Percentage of output capacity reserved for short term.
-        * *Default value:* *None*
-        * *Default unit:* %
+        * *Unit:* %
         * *Validity:* Float
 
     ⚙️ Mois démarrage capas annuelles
         * *Description:* Start month for annual capacities.
-        * *Default value:* *None*
-        * *Default unit:* Month
+        * *Unit:* Month
         * *Validity:* Integer
 
     ⚙️ Début modélisation capas annuelles entrée
         * *Description:* Start of annual input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas annuelles sortie
         * *Description:* Start of annual output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas trimestrielles entrée
         * *Description:* Start of quarterly input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas trimestrielles sortie
         * *Description:* Start of quarterly output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas mensuelles entrée
         * *Description:* Start of monthly input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas mensuelles sortie
         * *Description:* Start of monthly output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas journalières entrée
         * *Description:* Start of daily input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Début modélisation capas journalières sortie
         * *Description:* Start of daily output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas annuelles entrée
         * *Description:* End of annual input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas annuelles sortie
         * *Description:* End of annual output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
-        * *Validity:* Date
+        * *Unit:* Date
 
     ⚙️ Fin modélisation capas trimestrielles entrée
         * *Description:* End of quarterly input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas trimestrielles sortie
         * *Description:* End of quarterly output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas mensuelles entrée
         * *Description:* End of monthly input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas mensuelles sortie
         * *Description:* End of monthly output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas journalières entrée
         * *Description:* End of daily input capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
+        * *Unit:* Date
         * *Validity:* Date
 
     ⚙️ Fin modélisation capas journalières sortie
         * *Description:* End of daily output capacity modeling.
-        * *Default value:* *None*
-        * *Default unit:* Date
         * *Validity:* Date
 
     ⚙️ Tarif Capacite entree [€/MWh/j]
         * *Description:* Input capacity tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh/d
-        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifsParDate<target_tarifs_par_date>` sheet.
+        * *Unit:* €/MWh/d
 
     ⚙️ Tarif Capacite sortie [€/MWh/j]
         * *Description:* Output capacity tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh/d
-        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifsParDate<target_tarifs_par_date>` sheet.
+        * *Unit:* €/MWh/d
+        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifParDate<target_tarif_par_date>` sheet.
 
     ⚙️ Tarif Variable entree [€/MWh]
         * *Description:* Variable input tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh
-        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifsParDate<target_tarifs_par_date>` sheet.
+        * *Unit:* €/MWh
+        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifParDate<target_tarif_par_date>` sheet.
 
     ⚙️ Tarif Variable sortie [€/MWh]
         * *Description:* Variable output tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh
-        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifsParDate<target_tarifs_par_date>` sheet.
+        * *Unit:* €/MWh
+        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifParDate<target_tarif_par_date>` sheet.
 
     ⚙️ Gas-in-kind entrée [%]
         * *Description:* Gas-in-kind input.
-        * *Default value:* *None*
-        * *Default unit:* %
+        * *Unit:* %
         * *Validity:* Float
 
     ⚙️ Gas-in-kind sortie [%]
         * *Description:* Gas-in-kind output.
-        * *Default value:* *None*
-        * *Default unit:* %
+        * *Unit:* %
         * *Validity:* Float
 
     ⚙️ Multiplicateur trimestriel Tarif Capa d'entrée
         * *Description:* Quarterly input capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Multiplicateur mensuel Tarif Capa d'entrée
         * *Description:* Monthly input capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Multiplicateur journalier Tarif Capa d'entrée
         * *Description:* Daily input capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Multiplicateur trimestriel Tarif Capa de sortie
         * *Description:* Quarterly output capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Multiplicateur mensuel Tarif Capa de sortie
         * *Description:* Monthly output capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* Float
 
     ⚙️ Multiplicateur journalier Tarif Capa de sortie
         * *Description:* Daily output capacity tariff multiplier.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel entrée Q1
         * *Description:* Quarterly seasonal factor input Q1.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel entrée Q2
         * *Description:* Quarterly seasonal factor input Q2.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel entrée Q3
         * *Description:* Quarterly seasonal factor input Q3.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel entrée Q4
         * *Description:* Quarterly seasonal factor input Q4.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel sortie Q1
         * *Description:* Quarterly seasonal factor output Q1.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier trimestriel sortie Q2
         * *Description:* Quarterly seasonal factor output Q2.
-        * *Default value:* *None*
-        * *Default unit:* *None*
-        * *Validity:* Float
+        * *Unit:* *None*
 
     ⚙️ Facteur saisonnier trimestriel sortie Q3
         * *Description:* Quarterly seasonal factor output Q3.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
-
     ⚙️ Facteur saisonnier trimestriel sortie Q4
         * *Description:* Quarterly seasonal factor output Q4.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
-    ⚙️ Facteur saisonnier mensuel entrée Janvier
         * *Description:* Monthly seasonal factor input January.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Février
-        * *Description:* Monthly seasonal factor input February.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Mars
         * *Description:* Monthly seasonal factor input March.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Avril
         * *Description:* Monthly seasonal factor input April.
-        * *Default value:* *None*
-        * *Default unit:* *None*
-        * *Validity:* Float
-
+        * *Unit:* *None*
     ⚙️ Facteur saisonnier mensuel entrée Mai
         * *Description:* Monthly seasonal factor input May.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
-    ⚙️ Facteur saisonnier mensuel entrée Juin
         * *Description:* Monthly seasonal factor input June.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Juillet
-       * *Description:* Monthly seasonal factor input July.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Août
        * *Description:* Monthly seasonal factor input August.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Septembre
        * *Description:* Monthly seasonal factor input September.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Octobre
        * *Description:* Monthly seasonal factor input October.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Novembre
        * *Description:* Monthly seasonal factor input November.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel entrée Décembre
        * *Description:* Monthly seasonal factor input December.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Janvier
        * *Description:* Monthly seasonal factor output January.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Février
        * *Description:* Monthly seasonal factor output February.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Mars
        * *Description:* Monthly seasonal factor output March.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Avril
        * *Description:* Monthly seasonal factor output April.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Mai
        * *Description:* Monthly seasonal factor output May.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Juin
        * *Description:* Monthly seasonal factor output June.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Juillet
        * *Description:* Monthly seasonal factor output July.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Août
        * *Description:* Monthly seasonal factor output August.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Septembre
        * *Description:* Monthly seasonal factor output September.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Octobre
        * *Description:* Monthly seasonal factor output October.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Novembre
        * *Description:* Monthly seasonal factor output November.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier mensuel sortie Décembre
        * *Description:* Monthly seasonal factor output December.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Janvier
        * *Description:* Daily seasonal factor input January.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Février
        * *Description:* Daily seasonal factor input February.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Mars
        * *Description:* Daily seasonal factor input March.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Avril
        * *Description:* Daily seasonal factor input April.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Mai
        * *Description:* Daily seasonal factor input May.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Juin
        * *Description:* Daily seasonal factor input June.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Juillet
        * *Description:* Daily seasonal factor input July.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Août
        * *Description:* Daily seasonal factor input August.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Septembre
        * *Description:* Daily seasonal factor input September.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Octobre
        * *Description:* Daily seasonal factor input October.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Novembre
        * *Description:* Daily seasonal factor input November.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier entrée Décembre
        * *Description:* Daily seasonal factor input December.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Janvier
        * *Description:* Daily seasonal factor output January.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Février
        * *Description:* Daily seasonal factor output February.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Mars
        * *Description:* Daily seasonal factor output March.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Avril
        * *Description:* Daily seasonal factor output April.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Mai
        * *Description:* Daily seasonal factor output May.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Juin
        * *Description:* Daily seasonal factor output June.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Juillet
        * *Description:* Daily seasonal factor output July.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Août
        * *Description:* Daily seasonal factor output August.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Septembre
        * *Description:* Daily seasonal factor output September.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Octobre
        * *Description:* Daily seasonal factor output October.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Novembre
        * *Description:* Daily seasonal factor output November.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
     ⚙️ Facteur saisonnier journalier sortie Décembre
        * *Description:* Daily seasonal factor output December.
-       * *Default value:* *None*
-       * *Default unit:* *None*
+       * *Unit:* *None*
        * *Validity:* Float
 
-.. _target_laison:
+.. _target_liaison:
 .. admonition:: Liaison
     :class: error
 
@@ -794,50 +751,35 @@ Excel input sheets
           - Capacity tariff [€/MWh/d] (eg: 0.1)
           - % Fuel gas [0;100] (eg: 1.8) 
 
-    *Mandatory sheet*: ❌
-
-.. _laison:
-
     ⚙️ Liaison
         * *Description:* Unique name of the link.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String
 
     ⚙️ zone debut
         * *Description:* Start zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
 
     ⚙️ zone fin
         * *Description:* End zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
         * *Validity:* String. Must be part of the zones defined in the :ref:`Zones<target_zones>` sheet.
 
     ⚙️ Capacite [MWh/j]
         * *Description:* Capacity.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
-        * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`CapaParPdt<target_capa_par_pdt>` sheet.
+        * *Unit:* MWh/d
 
     ⚙️ Tarif en volume [€/MWh]
         * *Description:* Volume tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifParDate<target_tarif_par_date>` sheet.
-
     ⚙️ Tarif Capacite [€/MWh/j]
         * *Description:* Capacity tariff.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh/d
+        * *Unit:* €/MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`TarifParDate<target_tarif_par_date>` sheet.
 
-    ⚙️ % Gaz carburant [0;100]
         * *Description:* % Fuel gas.
-        * *Default value:* *None*
-        * *Default unit:* %
+        * *Unit:* %
         * *Validity:* Float
 
 .. _target_interconnexion:
@@ -848,7 +790,6 @@ Excel input sheets
 
     .. list-table::
         :widths: 25 25 25 
-        :header-rows: 1
 
         * - Nom	
           - PIR debut	
@@ -857,26 +798,19 @@ Excel input sheets
           - Start PIR (eg: LBTG | OPAL | Exit to Gaspool)
           - End PIR (eg: GASCADE | DE-GPL | Entry from OPAL)
 
-    *Mandatory sheet*: ❌
-
-.. _interconnexion:
-
     ⚙️ Nom
         * *Description:* Unique name of the interconnection.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String
 
     ⚙️ PIR debut
         * *Description:* Start PIR.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the PIRs defined in the :ref:`PIR<target_pir>` sheet.
 
     ⚙️ PIR fin
         * *Description:* End PIR.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the PIRs defined in the :ref:`PIR<target_pir>` sheet.
 
 .. _target_maintenance_transport:
@@ -900,36 +834,27 @@ Excel input sheets
           - End (eg: 29/07/2019)
           - Remaining capacity [MWh/d] (eg: 0) 
 
-    *Mandatory sheet*: ❌
-
-.. _maintenance_transport:
-
     ⚙️ Nom
         * *Description:* Unique name of the maintenance transport.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the PIRs defined in the :ref:`PIR<target_pir>` sheet, a PTM defined in the :ref:`PTM<target_ptm>` sheet or a PITS defined in the :ref:`PITS<target_pits>` sheet.
 
     ⚙️ Direction
         * *Description:* Direction.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be either *Entry* or *Exit*.
 
     ⚙️ Debut
         * *Description:* Start.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ Fin
         * *Description:* End.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ Capa restante [MWh/j]
         * *Description:* Remaining capacity.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float

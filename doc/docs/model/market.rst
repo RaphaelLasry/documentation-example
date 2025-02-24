@@ -7,6 +7,39 @@ Markets
     :depth: 2
     :local:
 
+General introduction
+--------------------
+
+The goal of this module is to introduce a market where the produced gas could be sold or purchased.
+
+In the global picture of the object available in Cactus we'll focus on the following ones:
+
+.. image:: drawio/Market/Diagram_1.png
+    :alt: Focus on Market
+    :align: center
+
+Technical description and model assumptions
+-------------------------------------------
+
+The global modeling of the market lies only on two main equations:
+
+.. math:: \text{MaxSold} \leq \text{Market} \leq \text{MaxBought}
+
+Where, the two parameters MaxSold and MaxBought are defined in the :ref:`Marches<target_marches>` sheet.
+
+The quantity that is bought on a market (aside from the spot one) must be equal on all periods:
+
+.. math:: \text{Market}_{p} = \text{Market}_{p-1}
+
+Then, the markets intervene in two other constraints in the rest of the model:
+
+    - In the `CtrBilanZone`, where the gas bought or sold on the markets is taken into account at the zone level.
+    - In the :ref:`Balance of a PIR<target_ctr_bilan_pir_entree>` where the gas bought or sold can also be transferred to the rest of the system.
+
+Finally, the price of the gas is taken into account in the objective function of the model.
+
+.. math:: \text{ObjFunction} += \text{Market} \times \text{Price}
+
 Excel input sheets
 ------------------
 
@@ -32,45 +65,35 @@ Excel input sheets
           - Max daily sale [MWh/d] (ex: 500)
           - Price [€/MWh] (ex: Prix_Market_FR)
           - Spot {0,1} (ex: 1)
-    
-    *Mandatory sheet*: ❌
-
-.. _markets:
 
     ⚙️ marche
         * *Description:* Unique name of the market.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String
 
     ⚙️ livraison
         * *Description:* Delivery zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String
 
     ⚙️ max achat journalier [MWh/j]
         * *Description:* Maximum daily purchase.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`MaxMarches<target_max_marches>` sheet.
 
     ⚙️ max vente journalier [MWh/j]
         * *Description:* Maximum daily sale.
-        * *Default value:* *None*
-        * *Default unit:* MWh/d
+        * *Unit:* MWh/d
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`MaxMarches<target_max_marches>` sheet.
 
     ⚙️ prix [€/MWh] 
         * *Description:* Price for purchasing or selling gas.
-        * *Default value:* *None*
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float or String. If String, then it must refer to a value defined in the :ref:`PrixApproParPdt<target_prix_appro_par_pdt>` sheet.
 
     ⚙️ spot {0,1}    
         * *Description:* Bollean to flag if the market is the *spot* or not.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Boolean
 
 .. _target_max_marches:
@@ -89,13 +112,8 @@ Excel input sheets
         * - Period (ex: 2020)
           - Value1 (ex: 500)
           - Value2 (ex: 1000)
-    
-    *Mandatory sheet*: ❌
-
-.. _max_marches:
 
     ⚙️ Periode
         * *Description:* Unique index for the period.
-        * *Default value:* *None*
-        * *Default unit:* *None*
-        * *Validity:* Date. It must refer to a value defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit:* *None*
+        * *Validity:* Date. It must refer to a value defined in the :ref:`Horizon<target_horizon>` sheet.

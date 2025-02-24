@@ -286,22 +286,17 @@ Excel input sheets
 
     *Mandatory sheet*: ❌ (mandatory if the model is stochastic)
 
-.. _scenario_demand_coeff:
-
     ⚙️ Period
         * *Description:* The period for which the demand scenario is defined.
-        * *Default value:* *None*
-        * *Default unit:* *None*
-        * *Validity:* Date. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit:* *None*
+        * *Validity:* Date. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
     ⚙️ Probability
         * *Description:* The probability of the demand scenario.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float. The sum of all probabilities for a given period must be equal to 1.
 
     ⚙️ Zone1, Zone2, ...
         * *Description:* The demand coefficient for each zone.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Float. The zones must be defined in the :ref:`Zones<target_zones>` sheet.

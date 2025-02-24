@@ -1,14 +1,14 @@
 :orphan:  .. NOT DELETE: Avoid warning about document not being included in any toctree
 
 Model
-===========================
+=====
 
 .. toctree::
     :caption: Model
     :maxdepth: 1
     :hidden:
 
-    global_parameters
+    model_overview
     demand
     production
     market
@@ -18,3 +18,4 @@ Model
     sddp
     shipping
     time_series
+    cats

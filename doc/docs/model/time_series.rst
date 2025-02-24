@@ -7,6 +7,10 @@ Time Series
     :depth: 2
     :local:
 
+General introduction
+--------------------
+
+The times series module allow the user to serialize the data for each timestamp. The idea is that instead of having only one value the user could want to make it evolve through time. To do so, we use a system of index/key. It means that in some sheets it is possible to define a string instead of a float. This string will be used as a key to retrieve the value of the time series defined in the sheets below. As an example in the sheet :ref:`PIR<target_pir>` one of the parameter required is the price for the capacity (in or out). Such price could evolve trough time by putting a reference to a time series in the sheet :ref:`TarifParDate<target_tarif_par_date>`. Be aware that this does not make the model more complex at all as it's treated in the pre-processing phase.
 
 Excel input sheets
 ------------------
@@ -30,20 +34,14 @@ Excel input sheets
           - TM_ZONE_2 (eg: 0.2)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _tarif_tm_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Tariff value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float.
 
 .. _target_capa_tm_par_date:
@@ -65,20 +63,14 @@ Excel input sheets
           - Regaz_Capa_Swinoujscie (eg: 58,670,100)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _capa_tm_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Capacity value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_tarif_tl_par_date:
@@ -100,20 +92,14 @@ Excel input sheets
           - TL_ZONE_2 (eg: 0.2)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _tarif_tl_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Tariff value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float.
 
 .. _target_capa_lique_par_date:
@@ -135,20 +121,14 @@ Excel input sheets
           - Lique_ID-KP | Lique_Sengkang LNG (eg: 19,675)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _capa_tl_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Capacity value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_tarif_par_date:
@@ -170,20 +150,14 @@ Excel input sheets
           - SortieVar_DE_PIR (eg: 0.04)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _tarif_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Tariff value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float.
 
 .. _target_capa_par_pdt:
@@ -205,20 +179,14 @@ Excel input sheets
           - AddEntree_Amber Grid | LT | Kiemenai (eg: 65,100)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _capa_par_pdt:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Capacity value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_volume_utile_par_date:
@@ -240,20 +208,14 @@ Excel input sheets
           - AddVolume_Fluxys - Loenhout (eg: 3,163,987)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _volume_utile_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Volume value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_acq_par_date:
@@ -275,20 +237,14 @@ Excel input sheets
           - ACQ_LNG_QA>KW (eg: 37,100,000)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _acq_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Annual quantity contract value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
   
 .. _target_dcq_par_pdt:
@@ -310,20 +266,14 @@ Excel input sheets
           - DCQmax_LNG_DZ>FR (eg: 110)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _dcq_par_pdt:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Daily contract quantity value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_prix_appro_par_pdt:
@@ -345,20 +295,14 @@ Excel input sheets
           - PRIX_ZONE_2 (eg: 0.2)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _prix_appro_par_pdt:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Purchase price value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float.
 
 .. _target_prod_max_par_date:
@@ -378,26 +322,19 @@ Excel input sheets
           - Date1 (eg: 01/01/2020)
           - Annual Maximal Production (eg: 1,000,000)
 
-    *Mandatory sheet*: ❌
-
-.. _prod_max_par_date:
-
     ⚙️ Champ
         * *Description:* Name of the production plant.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the productions defined in the :ref:`Champs<target_champs>` sheet.
 
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ ProdAnnuelleMax
         * *Description:* Annual maximal production value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_res_dev_max_par_date:
@@ -418,23 +355,15 @@ Excel input sheets
           - RDM_002/05-03 (Tor Southeast) - Southeast Tor (eg: 0)
           - RDM_009/18A-40 (Garten) (eg: 3859857.871)
           - ... 
-
-    *Mandatory sheet*: ❌
-
-..
-    _TODO Check the meaning
-.. _res_dev_max_par_date:
-
+    
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Maximum reserve deviation value for each timestamp. 
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_cout_prod_par_date:
@@ -456,20 +385,14 @@ Excel input sheets
           - CoutProd2 (eg: 10)
           - ... 
 
-    *Mandatory sheet*: ❌
-
-.. _cout_prod_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Production cost value for each timestamp. 
-        * *Default value:* 0
-        * *Default unit:* €/MWh
+        * *Unit:* €/MWh
         * *Validity:* Float.
 
 .. _target_top_par_date:
@@ -491,20 +414,14 @@ Excel input sheets
           - TOP_Russia (eg: 7,200,000,000)
           - ... 
 
-    *Mandatory sheet*: ❌
-
-.. _top_par_date:
-
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ TimeSeries1, TimeSeries2, ...
         * *Description:* Take or Pay value for each timestamp. 
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_remplissage_pays_par_date:
@@ -526,32 +443,24 @@ Excel input sheets
           - Min level of stock (eg: 0)
           - Max level of stock (eg: 100)
 
-    *Mandatory sheet*: ❌
-
-.. _remplissage_pays_par_date:
-
     ⚙️ Pays
         * *Description:* Name of the country.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the countries defined in the :ref:`ATS<target_ats>` sheet. If left blank, the country defined above will be used.
 
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ NiveauxStockMin
         * *Description:* Minimum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
     ⚙️ NiveauxStockMax
         * *Description:* Maximum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_remplissage_stockage_par_date:
@@ -573,32 +482,24 @@ Excel input sheets
           - Min level of stock (eg: 47)
           - Max level of stock (eg: 93)
 
-    *Mandatory sheet*: ❌
-
-.. _remplissage_stockage_par_date:
-
     ⚙️ Stockage
         * *Description:* Name of the storage.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the storages defined in the :ref:`ATS<target_ats>` sheet. If left blank, the storage defined above will be used.
 
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ NiveauxStockMin
         * *Description:* Minimum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
     ⚙️ NiveauxStockMax
         * *Description:* Maximum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_remplissage_tm_par_date:
@@ -620,32 +521,24 @@ Excel input sheets
           - Min level of stock (eg: 51)
           - Max level of stock (eg: 51)
 
-    *Mandatory sheet*: ❌
-
-.. _remplissage_tm_par_date:
-
     ⚙️ NomTM
         * *Description:* Name of the TM.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the TMs defined in the :ref:`ATTM<target_attm>` sheet. If left blank, the TM defined above will be used.
 
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ NiveauStockMin
         * *Description:* Minimum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
     ⚙️ NiveauStockMax
         * *Description:* Maximum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
 .. _target_remplissage_lique_par_date:
@@ -667,30 +560,22 @@ Excel input sheets
           - Min level of stock (eg: 80)
           - Max level of stock (eg: 81)
 
-    *Mandatory sheet*: ❌
-
-.. _remplissage_lique_par_date:
-
     ⚙️ NomLique
         * *Description:* Name of the liquefaction.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* String. Must be part of the liquefactions defined in the :ref:`Lique<target_Lique>` sheet. If left blank, the liquefaction defined above will be used.
 
     ⚙️ Date
         * *Description:* Date of the times series.
-        * *Default value:* *None*
-        * *Default unit:* *None*
+        * *Unit:* *None*
         * *Validity:* Date
 
     ⚙️ NiveauStockMin
         * *Description:* Minimum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.
 
     ⚙️ NiveauStockMax
         * *Description:* Maximum level of stock value for each timestamp.
-        * *Default value:* 0
-        * *Default unit:* MWh
+        * *Unit:* MWh
         * *Validity:* Float.

@@ -1,5 +1,6 @@
 :orphan:  .. NOT DELETE: Avoid warning about document not being included in any toctree
 
+.. _target_shipping_module:
 Shipping
 ========
 
@@ -26,20 +27,14 @@ Excel input sheets
         * - Nodes (eg: LNG_AE)
           - Maximum number of vessels (eg: 37)
 
-    *Mandatory sheet*: ❌
-
-.. _lng_nodes:
-
     ⚙️ Nodes
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String.
 
     ⚙️ Max nb vessels
         * *Description*: Maximum number of vessels that can be loaded or unloaded at the node.
-        * *Default value*: 0
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Integer
 
 .. _target_shipping_dist:
@@ -59,26 +54,19 @@ Excel input sheets
           - Destination (eg: LNG_AO)
           - Distance in nautical miles (eg: 6555)
 
-    *Mandatory sheet*: ❌
-
-.. _shipping_dist:
-
     ⚙️ Origin
         * *Description*: Name of the origin LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Destination
         * *Description*: Name of the destination LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Distance [nm]
         * *Description*: Distance between the origin and destination in nautical miles. 1 nautical miles is equal to 1.852 km.
-        * *Default value*: 0
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Integer
 
 .. _target_vessels:
@@ -106,50 +94,39 @@ Excel input sheets
           - Average cargo size in MWh (eg: 1,144,913)
           - Initial laden share in % (eg: 60%)
 
-    *Mandatory sheet*: ❌
-
-.. _vessels:
-
     ⚙️ Type
         * *Description*: Name of the vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String.
 
     ⚙️ Capacity hold [MWh]
         * *Description*: Capacity of the hold in MWh.
-        * *Default value*: 0
-        * *Default unit*: MWh
+        * *Unit*: MWh
         * *Validity*: Float
 
     ⚙️ Speed [kn]
         * *Description*: Speed of the vessel in knots. One knot is equal to 1.852 km/h.
-        * *Default value*: 0
-        * *Default unit*: knots
+        * *Unit*: knots
         * *Validity*: Float
 
     ⚙️ BOR [%]
         * *Description*: Boil off rate in %.
-        * *Default value*: 0
-        * *Default unit*: %
+        * *Unit*: %
         * *Validity*: Float
 
     ⚙️ Charter cost [€/MWh of Capacity/day]
         * *Description*: Charter cost in €/MWh of capacity per day.
-        * *Default value*: 0
-        * *Default unit*: €/MWh of capacity per day
+        * *Unit*: €/MWh of capacity per day
         * *Validity*: Float
 
     ⚙️ Average cargo size [MWh]
         * *Description*: Average cargo size in MWh.
-        * *Default value*: 0
-        * *Default unit*: MWh
+        * *Unit*: MWh
         * *Validity*: Float
 
     ⚙️ Initial Laden Share
         * *Description*: Initial laden share in %.
-        * *Default value*: 0
-        * *Default unit*: %
+        * *Unit*: %
         * *Validity*: Float
 
 .. _target_lng_nodes_accept:
@@ -171,32 +148,24 @@ Excel input sheets
           - Accept import (eg: 1)
           - Accept export (eg: 0)
 
-    *Mandatory sheet*: ❌
-
-.. _lng_nodes_accept:
-
     ⚙️ Nodes
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Type
         * *Description*: Name of the vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ Accept import
         * *Description*: 1 if the node can accept import, 0 otherwise.
-        * *Default value*: 0
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Integer
 
     ⚙️ Accept export
         * *Description*: 1 if the node can accept export, 0 otherwise.
-        * *Default value*: 0
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Integer
 
 .. _target_vessels_restrictions:
@@ -218,32 +187,24 @@ Excel input sheets
           - Type (eg: ARC7)
           - Accept (eg: 1)
 
-    *Mandatory sheet*: ❌
-
-.. _vessels_restrictions:
-
     ⚙️ Origin
         * *Description*: Name of the origin LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Destination
         * *Description*: Name of the destination LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Type
         * *Description*: Name of the vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ Accept
         * *Description*: 1 if the vessel can accept the route, 0 otherwise.
-        * *Default value*: 0
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Integer
 
 .. _target_addit_shipping:
@@ -267,27 +228,20 @@ Excel input sheets
           - 02/02/2020 (eg: 1 200 000)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _addit_shipping:
-
     ⚙️ Vessel type
         * *Description*: Name of the vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ LNG node
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Period1, Period2, ...
         * *Description*: Additional shipping capacity for each period. The capacity is in MWh/day.
-        * *Default value*: 0
-        * *Default unit*: MWh/day
-        * *Validity*: Float. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit*: MWh/day
+        * *Validity*: Float. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
 .. _target_canal_cost:
 .. admonition:: CanalCost
@@ -296,7 +250,7 @@ Excel input sheets
     *Sheet Description*: This sheet defines the cost of the canal for each vessel type and LNG node.
 
     .. list-table::
-        :widths: 25 25 25
+        :widths: 25 25 25 25
         :header-rows: 1
 
         * - LNG node
@@ -308,32 +262,24 @@ Excel input sheets
           - Cost laden in €/MWh of capacity (eg: 0.32)
           - Cost ballast in €/MWh of capacity (eg: 0.29)
 
-    *Mandatory sheet*: ❌
-
-.. _canal_cost:
-
     ⚙️ LNG node
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Vessel type
         * *Description*: Name of the vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ Cost laden [€/MWh of Capacity]
         * *Description*: Cost in €/MWh of capacity when the vessel is laden.
-        * *Default value*: 0
-        * *Default unit*: €/MWh of capacity
+        * *Unit*: €/MWh of capacity
         * *Validity*: Float
 
     ⚙️ Cost ballast [€/MWh of Capacity]
         * *Description*: Cost in €/MWh of capacity when the vessel is in ballast.
-        * *Default value*: 0
-        * *Default unit*: €/MWh of capacity
+        * *Unit*: €/MWh of capacity
         * *Validity*: Float
 
 .. _target_transit_capacity:
@@ -355,21 +301,15 @@ Excel input sheets
           - 02/02/2020 (eg: 4)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _transit_capacity:
-
     ⚙️ LNG node
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Period1, Period2, ...
         * *Description*: Maximum number of vessels that can transit the node in each period.
-        * *Default value*: 0
-        * *Default unit*: *None*
-        * *Validity*: Integer. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit*: *None*
+        * *Validity*: Integer. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
 .. _target_route_unavailable:
 .. admonition:: RouteUnavailable
@@ -392,27 +332,20 @@ Excel input sheets
           - 02/02/2020 (eg: 0)
           - ...
 
-    *Mandatory sheet*: ❌
-
-.. _route_unavailable:
-
     ⚙️ Origin
         * *Description*: Name of the origin LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Destination
         * *Description*: Name of the destination LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Period1, Period2, ...
         * *Description*: 1 if the route is unavailable, 0 otherwise.
-        * *Default value*: 0
-        * *Default unit*: *None*
-        * *Validity*: Integer. The periods must be defined in the :ref:`Horizon<target_periods>` sheet.
+        * *Unit*: *None*
+        * *Validity*: Integer. The periods must be defined in the :ref:`Horizon<target_horizon>` sheet.
 
 .. _target_transhipment:
 .. admonition:: Transhipment
@@ -435,38 +368,29 @@ Excel input sheets
           - Unit cost in €/MWh (eg: 0.2)
           - Boil off rate in % (eg: 0.5)
 
-    *Mandatory sheet*: ❌
-
-.. _transhipment:
-
     ⚙️ LNG node
         * *Description*: Name of the LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Source Vessel Type
         * *Description*: Name of the source vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ Destination Vessel Type
         * *Description*: Name of the destination vessel type.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the types defined in the :ref:`Vessels<target_vessels>` sheet.
 
     ⚙️ Unit cost [€/MWh]
         * *Description*: Unit cost in €/MWh.
-        * *Default value*: 0
-        * *Default unit*: €/MWh
+        * *Unit*: €/MWh
         * *Validity*: Float
 
     ⚙️ BOR
         * *Description*: Boil off rate in %.
-        * *Default value*: 0
-        * *Default unit*: %
+        * *Unit*: %
         * *Validity*: Float
 
 .. _target_lng_contracts:
@@ -492,44 +416,34 @@ Excel input sheets
           - Minimum DCQ (eg: DCQmin_LNG_DZ>FR)
           - Maximum DCQ (eg: 1,500,000)
 
-    *Mandatory sheet*: ❌
-
-.. _lng_contracts:
-
     ⚙️ Contract
         * *Description*: Name of the contract.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String.
 
     ⚙️ PeriodeDebut
         * *Description*: Start period of the contract.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Date.
 
     ⚙️ PeriodeFin
         * *Description*: End period of the contract.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: Date.
 
     ⚙️ ACQ
         * *Description*: Annual Contract Quantity in MWh.
-        * *Default value*: 0
-        * *Default unit*: MWh
+        * *Unit*: MWh
         * *Validity*: Float or String. If String, then it must refer to a value defined in the :ref:`ACQParDate<target_acq_par_date>` sheet. 
 
     ⚙️ DCQ min
         * *Description*: Minimum Daily Contract Quantity in MWh/day.
-        * *Default value*: 0
-        * *Default unit*: MWh/day
+        * *Unit*: MWh/day
         * *Validity*: Float or String. If String, then it must refer to a value defined in the :ref:`DCQParPdt<target_dcq_par_pdt>` sheet.
 
     ⚙️ DCQ max
         * *Description*: Maximum Daily Contract Quantity in MWh/day.
-        * *Default value*: 0
-        * *Default unit*: MWh/day
+        * *Unit*: MWh/day
         * *Validity*: Float or String. If String, then it must refer to a value defined in the :ref:`DCQParPdt<target_dcq_par_pdt>` sheet.
 
 .. _target_contract_routes:
@@ -549,24 +463,17 @@ Excel input sheets
           - Origin (eg: LNG_DZ)
           - Destination (eg: LNG_FR)
 
-    *Mandatory sheet*: ❌
-
-.. _contract_routes:
-
     ⚙️ Contract
         * *Description*: Name of the contract.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the contracts defined in the :ref:`LNGContracts<target_lng_contracts>` sheet.
 
     ⚙️ Origin
         * *Description*: Name of the origin LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.
 
     ⚙️ Destination
         * *Description*: Name of the destination LNG node.
-        * *Default value*: *None*
-        * *Default unit*: *None*
+        * *Unit*: *None*
         * *Validity*: String. Must be part of the nodes defined in the :ref:`LNGNodes<target_lng_nodes>` sheet.

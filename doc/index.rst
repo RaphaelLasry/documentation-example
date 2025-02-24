@@ -45,4 +45,5 @@ Cactus helps you optimize the dispatch of the gas in the world and operate the s
     docs/installation/index
     docs/model/index
     docs/output/index
+    docs/code/index
     
