@@ -24,7 +24,6 @@ extensions = [
     "sphinx_rtd_theme",  # Read the Docs theme
     "rst2pdf.pdfbuilder",  # PDF builder
     "sphinx.ext.mathjax",  # MathJax support
-    'sphinxcontrib.drawio',
 ]
 
 master_doc = "index"  # The master toctree document
