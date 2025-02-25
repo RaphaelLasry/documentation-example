@@ -1,0 +1,669 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Production &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/layout.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Markets" href="market.html" />
+    <link rel="prev" title="Demand" href="demand.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model_overview.html">Model Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demand.html">Demand</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Production</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-introduction">General introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-description-and-model-assumptions">Technical description and model assumptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gas-supply">Gas supply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gas-fields">Gas fields</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Gas supply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Gas fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="market.html">Markets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lng.html">LNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sddp.html">SDDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping.html">Shipping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_series.html">Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cats.html">Cats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output/index.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Model</a></li>
+      <li class="breadcrumb-item active">Production</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/model/production.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="production">
+<h1>Production<a class="headerlink" href="#production" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-introduction" id="id3">General introduction</a></p></li>
+<li><p><a class="reference internal" href="#technical-description-and-model-assumptions" id="id4">Technical description and model assumptions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gas-supply" id="id5">Gas supply</a></p></li>
+<li><p><a class="reference internal" href="#gas-fields" id="id6">Gas fields</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#excel-input-sheets" id="id7">Excel input sheets</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id8">Gas supply</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id9">Gas fields</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="general-introduction">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">General introduction</a><a class="headerlink" href="#general-introduction" title="Link to this heading"></a></h2>
+<p>The production module is responsible for modeling the gas supply. It can be done in two ways: through gas fields or gas contracts. The gas fields represent the physical gas plant with some real components such the cost for operating them, the overall availability etc., while the gas contracts represent the fixed agreement between two parts with potential adjustment in the annual or periodic offtake. The appros are linked to either a PIR, a TM or a PTM, whereas a field is always linked to a given PIR.</p>
+<p>In the global picture of the object available in Cactus we’ll focus on the following ones:</p>
+<img alt="Focus on Production" class="align-center" src="../../_images/Diagram_15.png" />
+</section>
+<section id="technical-description-and-model-assumptions">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Technical description and model assumptions</a><a class="headerlink" href="#technical-description-and-model-assumptions" title="Link to this heading"></a></h2>
+<section id="gas-supply">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Gas supply</a><a class="headerlink" href="#gas-supply" title="Link to this heading"></a></h3>
+<p>The supply are contract that are defined by two main elements: the price and the volumes (periodic and annual). The price is rather simple as it’s simply a figure (that could be serialized). The volume one is slightly more complex as part of it could be subject to optimization. To reflect this, multiple modes exist:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The model chooses both the annual and daily contracted volumes. The size of the strip around the daily volume is proportional to the annual volume contracted.</p></li>
+<li><p>Fix the annual volume (by the user), and the model can choose the daily contracted volume but can’t choose the size of the strip around this daily volume (which depends on annual one).</p></li>
+<li><p>The model can’t choose neither the daily volume nor the size of the strip around it (and thus of course, nor the annual one).</p></li>
+</ul>
+</div></blockquote>
+<p>Thus, the <em>appros</em> intervene in the model at different places:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>In the <a class="reference internal" href="pipeline.html#target-ctr-bilan-pir-entree"><span class="std std-ref">PIR main balance equation</span></a></p></li>
+<li><p>In the <a class="reference internal" href="lng.html#target-ctr-bilan-ptm"><span class="std std-ref">PTM main balance equation</span></a></p></li>
+<li><p>In the <a class="reference internal" href="lng.html#target-ctr-bilan-tm"><span class="std std-ref">TM main balance equation</span></a></p></li>
+</ul>
+</div></blockquote>
+<p>Obviously this is accounted in the objective function as well:</p>
+<div class="math notranslate nohighlight">
+\[ObjFunction += \text{Appro} \times \text{Appro Price}\]</div>
+<p>The three different modes for the flexibility are represented as follow in the model. Of course, on all modes, the main variable remains the Appro.</p>
+<p>For the mode 0, the one where the model is the more free, it can both chose the DCQ (periodic delivery of gas) and the size of the strip around the contractual delivery (Appro). The values min and max DCQ are provided by the user.</p>
+<div class="math notranslate nohighlight">
+\[\text{Max DCQ} \times \text{DCQ} \geq \text{Appro} \geq \text{Min DCQ} \times \text{DCQ}\]</div>
+<p>Where the variables are the Appro and the DCQ.</p>
+<p>For the mode 1, the model can chose the DCQ but can’t chose the strip around the actual Appro (fixed by the user and is proportional to the Volume and the difference between the min and max DCQ).</p>
+<div class="math notranslate nohighlight">
+\[(\text{DCQ Max} - 1) \times \text{Volume} - \text{DCQ} \geq \text{Appro} \geq (\text{DCQ Min} - 1) \times \text{Volume} - \text{DCQ}\]</div>
+<p>For those two modes, we have also the following constraints (min and max ACQ are provided by the user):</p>
+<div class="math notranslate nohighlight">
+\[\text{Max ACQ} / 365 \geq \text{DCQ} \geq \text{Min ACQ} / 365\]</div>
+<p>For the mode 2, it’s the easiest as the model can’t chose neither the DCQ nor the strip around the Appro.</p>
+<div class="math notranslate nohighlight">
+\[\text{Max DCQ} \times \text{Volume} / 365 \geq \text{Appro} \geq \text{Min ACQ} \times \text{Volume} / 365\]</div>
+</section>
+<section id="gas-fields">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Gas fields</a><a class="headerlink" href="#gas-fields" title="Link to this heading"></a></h3>
+<p>The production model includes several key equations that govern the capacity and reserve constraints, as well as the production profiles. Below is a summary of these equations:</p>
+<ol class="arabic">
+<li><dl>
+<dt><strong>Capacity Development</strong>:</dt><dd><ul>
+<li><p><strong>Capacity</strong>: Constructs the contracted capacity over the years.</p>
+<div class="math notranslate nohighlight">
+\[\text{Capacity}_{\text{year}} = \text{Capacity}_{\text{year-1}} + \text{CapacityIncrease}\]</div>
+</li>
+<li><p><strong>Max Capacity</strong>: Constraints the maximum contracted capacity of the field.</p>
+<div class="math notranslate nohighlight">
+\[\text{Capacity}_{\text{year}} \leq \text{MaxCapacity}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Net Capacity Development</strong>:</dt><dd><ul>
+<li><p><strong>Net Capacity at Start</strong>: Constructs the developed net capacity at the start of the year.</p>
+<div class="math notranslate nohighlight">
+\[\text{NetCapacity}_{\text{start, year}} = \text{NetCapacity}_{\text{end, year-1}} + \text{CapacityIncrease}\]</div>
+</li>
+<li><p><strong>Net Capacity at End</strong>: Constructs the developed net capacity at the end of the year.</p>
+<div class="math notranslate nohighlight">
+\[\text{NetCapacity}_{\text{end, year}} = \text{NetCapacity}_{\text{start, year}} - \text{CapacityReduction}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Reserve Development</strong>:</dt><dd><ul>
+<li><p><strong>Reserve at Start</strong>: Constructs the reserve at the start of the year.</p>
+<div class="math notranslate nohighlight">
+\[\text{Reserve}_{\text{start, year}} = \text{Reserve}_{\text{end, year-1}} + \text{CapacityIncrease}\]</div>
+</li>
+<li><p><strong>Max Reserve at Start</strong>: Imposes constraints on the maximum reserve at the start of the year.</p>
+<div class="math notranslate nohighlight">
+\[\text{Reserve}_{\text{start, year}} \leq \text{NetCapacity}_{\text{start, year}}\]</div>
+</li>
+<li><p><strong>Reserve at End Before Decommissioning</strong>: Constructs the reserve at the end of the year before decommissioning.</p>
+<div class="math notranslate nohighlight">
+\[\text{Reserve}_{\text{end, year}} = \text{Reserve}_{\text{start, year}} - \text{AnnualProduction}\]</div>
+</li>
+<li><p><strong>Max Reserve at End After Decommissioning</strong>: Imposes constraints on the maximum reserve at the end of the year after decommissioning.</p>
+<div class="math notranslate nohighlight">
+\[\text{Reserve}_{\text{end, year}} \leq \text{NetCapacity}_{\text{end, year}}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Production Profiles</strong>:</dt><dd><ul>
+<li><p><strong>Annual Production Profile</strong>: Imposes constraints on the annual production profile.</p>
+<div class="math notranslate nohighlight">
+\[\text{AnnualProduction} \leq \text{ProfileSlope} \times \text{NetCapacity}_{\text{start, year}} + \text{ProfileIntercept} \times \text{Reserve}_{\text{start, year}}\]</div>
+</li>
+<li><p><strong>Average Daily Production</strong>: Constructs the average daily production for the year.</p>
+<div class="math notranslate nohighlight">
+\[\text{AnnualProduction} = \text{DaysInYear} \times \text{DailyProduction}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Daily Contract Quantity (DCQ) Constraints</strong>:</dt><dd><ul>
+<li><p><strong>DCQ by Period</strong>: Imposes DCQ constraints on production by period.</p>
+<div class="math notranslate nohighlight">
+\[\text{PeriodLength} \times \text{MaxDCQ} \times \text{DailyProduction} \geq \text{PeriodProduction} \geq \text{PeriodLength} \times \text{MinDCQ} \times \text{DailyProduction}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Take or Pay Constraints</strong>:</dt><dd><ul>
+<li><p><strong>Take or Pay</strong>: Imposes take or pay constraints on a production perimeter.</p>
+<div class="math notranslate nohighlight">
+\[\sum(\text{AnnualProduction}) \geq \text{TakeOrPay}\]</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>These equations ensure that the production model adheres to the specified capacity and reserve constraints, while also maintaining the required production profiles and DCQ constraints. The model also includes take or pay constraints to ensure compliance with contractual obligations.</p>
+<p>Of course, the production model is also accounted in the objective function as well:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    ObjFunction +&amp;= \sum \text{CapacityIncrease} \times \text{CAPEX Capacity} \\
+                &amp;+ \sum \text{CapacityReduction} \times \text{CAPEX Decommissioning} \\
+                &amp;+ \sum \text{PeriodProduction} \times \text{Variable OPEX} \\
+                &amp;+ \sum \text{NetCapacity}_{\text{start, year}} \times \text{Fixed OPEX} \\
+                &amp;+ \sum \text{NetCapacity}_{\text{end, year}} \times \text{Actualized Costs} \\
+                &amp;+ \sum \text{Reserve}_{\text{end, year}} \times \text{VAN} \\
+\end{align*}\end{split}\]</div>
+</section>
+</section>
+<section id="excel-input-sheets">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Excel input sheets</a><a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Gas supply</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-appros">
+<p class="admonition-title">Appros</p>
+<p><em>Sheet Description</em>: This sheet controls the gas contracts. Each contract is defined by its name, the minimum and maximum annual contracted volume, the gas price, the minimum and maximum daily contracted volume, the flexibility mode and the yearly volume contracted. With such object the user can define gas supply in the model.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>contrat</p></th>
+<th class="head"><p>ACQ Min [%]</p></th>
+<th class="head"><p>ACQ Max [%]</p></th>
+<th class="head"><p>prix volume [€/MWh]</p></th>
+<th class="head"><p>DCQ Min [%]</p></th>
+<th class="head"><p>DCQ Max [%]</p></th>
+<th class="head"><p>Mode de calcul de la flexibilite</p></th>
+<th class="head"><p>Volume annuel [MWh]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Contract (ex: Prod NO)</p></td>
+<td><p>ACQ Min (ex: 0)</p></td>
+<td><p>ACQ Max (ex: 100)</p></td>
+<td><p>Gas price (ex: 50)</p></td>
+<td><p>DCQ Min (ex: DCQmin_Prod NO)</p></td>
+<td><p>DCQ Max (ex: 100)</p></td>
+<td><p>Flexibility mode (ex: 1)</p></td>
+<td><p>Yearly volume (ex: ACQ_Prod NO)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ contrat</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unique name of the contract.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ ACQ Min [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Minimum <em>Annual Contract Quantity</em>. Minimum percentage of annual volume contracted that the system must consume.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ ACQ Max [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum <em>Annual Contract Quantity</em>. Maximum percentage of annual volume contracted that the system must consume.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ prix volume [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Price of the gas volume.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-prix-appro-par-pdt"><span class="std std-ref">PrixApproParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Min [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Minimum <em>Daily Contract Quantity</em>. Minimum percentage of daily volume contracted that the system must consume. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float or Sting. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-dcq-par-pdt"><span class="std std-ref">DCQParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Max [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum <em>Daily Contract Quantity</em>. Maximum percentage of daily volume contracted that the system must consume. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float or Sting. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-dcq-par-pdt"><span class="std std-ref">DCQParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Mode de calcul de la flexibilite</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><em>Description:</em> Integer that map the flexibility calculus. It can be 0, 1 or 2.</dt><dd><ul>
+<li><p>0: The contracted part should respect ACQ Min/Max constraints as well as DCQ Min/Max constraints. The model chooses both the annual and daily contracted volumes. The size of the strip around the daily volume is proportional to the latter.</p></li>
+<li><p>1: Differ from the previous option as the annual volume is now fixed (exogenous), and the model can choose the daily contracted volume but can’t choose the size of the strip around this daily volume (which depends on the exogenous annual volume).</p></li>
+<li><p>2: This is the less flexible option for the model can’t choose neither the daily volume nor the size of the strip around it.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Volume annuel [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Annual volume contracted.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-acq-par-date"><span class="std std-ref">ACQParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-raccordements-appros">
+<p class="admonition-title">RaccordementsAppros</p>
+<p><em>Sheet Description</em>: This sheet controls the connection points of the contracts. Each contract should be linked to a pipe, a liquefaction terminal or a regasification terminal.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>contrat</p></th>
+<th class="head"><p>livraison (PIR, PTM, TM)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Contract (ex: Prod NO)</p></td>
+<td><p>Connection point (ex: NO | Production)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ contrat</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unique name of the contract.</p></li>
+<li><p><em>Validity:</em> String. Must be part of the contracts defined in the <a class="reference internal" href="#target-appros"><span class="std std-ref">Appros</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ livraison (PIR, PTM, TM)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Delivery point of the contract. Each appros should either be linked to a pipe, a liquefaction terminal or a regasification terminal.</p></li>
+<li><p><em>Validity:</em> String. Must be part of the connection points defined in the <a class="reference internal" href="pipeline.html#target-pir"><span class="std std-ref">PIR</span></a>, <a class="reference internal" href="lng.html#target-ptm"><span class="std std-ref">PTM</span></a> or <a class="reference internal" href="lng.html#target-attm"><span class="std std-ref">ATTM</span></a> sheets.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Gas fields</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-perimetres-production">
+<p class="admonition-title">PerimetresProd</p>
+<p><em>Sheet Description</em>: This sheet controls the production areas. Each production area is defined by its name and the annual Take-or-Pay quantity. Please note that the areas and the zones are two different un-related spatial dimensions in Cactus. They are linked by the objects PIR.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Périmètre de production</p></th>
+<th class="head"><p>Quantité annuelle Take-or-Pay</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Production area (ex: Libya)</p></td>
+<td><p>Take-or-Pay annual quantity (ex: TOP_Libya)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Périmètre de production</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the production area.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+</ul>
+</dd>
+<dt>⚙️ Quantité annuelle Take-or-Pay</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Annual Take-or-Pay quantity.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-top-par-date"><span class="std std-ref">ToPParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-champs">
+<p class="admonition-title">Champs</p>
+<p><em>Sheet Description</em>: This sheet controls the fields. Each field is defined by its name, the production area, the connection point, the minimum and maximum daily contract quantity, the initial and maximum developed reserves, the development and dismantling CAPEX, the variable and fixed OPEX, the discounted cost of residual developed capacity and the residual gas NPV. It’s another way of modelling gas supply. Here the goal is to represent the physical gas plant as well as the quantity available in such a plant.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+<col style="width: 6.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champ</p></th>
+<th class="head"><p>Périmètre de production</p></th>
+<th class="head"><p>PIR de raccordement</p></th>
+<th class="head"><p>DCQ Min [%]</p></th>
+<th class="head"><p>DCQ Max [%]</p></th>
+<th class="head"><p>DCQ Min à la pointe [%]</p></th>
+<th class="head"><p>DCQ Max à la pointe [%]</p></th>
+<th class="head"><p>Réserves développées initiales [MWh]</p></th>
+<th class="head"><p>Réserves développées max [MWh]</p></th>
+<th class="head"><p>CAPEX développement [€/MWh]</p></th>
+<th class="head"><p>CAPEX démantèlement [€/MWh]</p></th>
+<th class="head"><p>OPEX Variable [€/MWh]</p></th>
+<th class="head"><p>OPEX Fixe [€/MWh]</p></th>
+<th class="head"><p>Coût actualisé capa développée résiduelle [€/MWh]</p></th>
+<th class="head"><p>VAN du gaz résiduel [€/MWh]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Field (ex: 097-TAMAR)</p></td>
+<td><p>Production area (ex: Libya)</p></td>
+<td><p>Connection point (ex: LY | Production)</p></td>
+<td><p>DCQ Min (ex: 65)</p></td>
+<td><p>DCQ Max (ex: 106)</p></td>
+<td><p>DCQ Min at peak (ex: 65)</p></td>
+<td><p>DCQ Max at peak (ex: 106)</p></td>
+<td><p>Initial developed reserves (ex: 4 500 000)</p></td>
+<td><p>Maximum developed reserves (ex: RDM_097-T)</p></td>
+<td><p>CAPEX development (ex: 0)</p></td>
+<td><p>CAPEX dismantling (ex:0.01)</p></td>
+<td><p>OPEX Variable (ex: 0.18)</p></td>
+<td><p>OPEX Fixed (ex: 0.01)</p></td>
+<td><p>Discounted cost of residual developed capacity (ex: 0)</p></td>
+<td><p>Residual gas NPV (ex: 0.68)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Champ</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unique name of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+<li><p><em>Description:</em> Production area of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Should be part of the production areas defined in the <a class="reference internal" href="#target-perimetres-production"><span class="std std-ref">PerimetresProd</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PIR de raccordement</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Connection point of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the connection points defined in the <a class="reference internal" href="pipeline.html#target-pir"><span class="std std-ref">PIR</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Min [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Minimum <em>Daily Contract Quantity</em>. Minimum percentage of daily volume contracted that the system must consume. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Max [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum <em>Daily Contract Quantity</em>. Maximum percentage of daily volume contracted that the system must consume. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Min à la pointe [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Minimum <em>Daily Contract Quantity</em> at peak. Minimum percentage of daily volume contracted that the system must consume at peak. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ Max à la pointe [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum <em>Daily Contract Quantity</em> at peak. Maximum percentage of daily volume contracted that the system must consume at peak. Daily volume contracted corresponds to the ACQ / 365.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Réserves développées initiales [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Initial developed reserves of the field.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Réserves développées max [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum developed reserves of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-res-dev-max-par-date"><span class="std std-ref">ResDevMaxParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ CAPEX développement [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Development CAPEX of the field.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-cout-prod-par-date"><span class="std std-ref">CoutProdParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ CAPEX démantèlement [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Dismantling CAPEX of the field.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-cout-prod-par-date"><span class="std std-ref">CoutProdParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ OPEX Variable [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable OPEX of the field.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-cout-prod-par-date"><span class="std std-ref">CoutProdParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ OPEX Fixe [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Fixed OPEX of the field.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-cout-prod-par-date"><span class="std std-ref">CoutProdParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Coût actualisé capa développée résiduelle [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Discounted cost of residual developed capacity.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ VAN du gaz résiduel [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Residual gas NPV.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-contraintes-prod">
+<p class="admonition-title">ContraintesProd</p>
+<p><em>Sheet Description</em>: This sheet controls the production constraints. Each constraint is defined by its name, the origin level and the slope for the evolution of the gas in the field. It allows the user to define the evolution of the gas in the field.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champ</p></th>
+<th class="head"><p>Origine</p></th>
+<th class="head"><p>Pente</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Champ (ex: 097-T)</p></td>
+<td><p>Origin (ex: 0.38)</p></td>
+<td><p>Slope (ex: -0.13)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Champ</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unique name of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the fields defined in the <a class="reference internal" href="#target-champs"><span class="std std-ref">Champs</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Origine</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Origin level of the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Pente</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Slope for the evolution of the gas in the field.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demand.html" class="btn btn-neutral float-left" title="Demand" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="market.html" class="btn btn-neutral float-right" title="Markets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Feb 24, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

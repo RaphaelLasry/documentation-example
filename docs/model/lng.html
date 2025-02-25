@@ -1,0 +1,1181 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LNG &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/layout.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pipelines" href="pipeline.html" />
+    <link rel="prev" title="Markets" href="market.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model_overview.html">Model Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demand.html">Demand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="production.html">Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="market.html">Markets</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LNG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-introduction">General introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-description-and-model-assumptions">Technical description and model assumptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#liquefaction-process">Liquefaction process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regasification-process">Regasification process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#regasification-terminal">Regasification terminal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#liquefaction-terminal">Liquefaction terminal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sddp.html">SDDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping.html">Shipping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_series.html">Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cats.html">Cats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output/index.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Model</a></li>
+      <li class="breadcrumb-item active">LNG</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/model/lng.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lng">
+<span id="target-lng-module"></span><h1>LNG<a class="headerlink" href="#lng" title="Link to this heading"></a></h1>
+<section id="general-introduction">
+<h2>General introduction<a class="headerlink" href="#general-introduction" title="Link to this heading"></a></h2>
+<p>The LNG (Liquefied Natural Gas) is becoming more and more present in the balance of the gas systems. The LNG model in Cactus allows the user to define the regasification and liquefaction terminals and their characteristics (mainly capacity and costs). In the global picture of the object available in Cactus we’ll focus on the following ones:</p>
+<img alt="Focus on LNG" class="align-center" src="../../_images/Diagram_11.png" />
+<p>The objects in this module goes by pairs, one for the regasification (resp. liquefaction) terminal and one for the point associated to it. Hence, an ATTM will be associated to a PTM (that could be linked to multiples ATTM), and a TL will be associated to a PITL (that could be linked to multiples TL).</p>
+</section>
+<section id="technical-description-and-model-assumptions">
+<h2>Technical description and model assumptions<a class="headerlink" href="#technical-description-and-model-assumptions" title="Link to this heading"></a></h2>
+<section id="liquefaction-process">
+<h3>Liquefaction process<a class="headerlink" href="#liquefaction-process" title="Link to this heading"></a></h3>
+<p>With the LNG model we only model the liquefaction and regasification processes but don’t model the shipping part (that is modelled in the <a class="reference internal" href="shipping.html#target-shipping-module"><span class="std std-ref">Shipping</span></a> module). Hence, it is assume to be a black box that will deliver the gas from the network (PITL) to the liquefaction terminal and then be regasified by a TM elsewhere. The PITL and TL are link by an equation (<cite>CtrBilanPITL</cite>) which makes sure that all the liquefied gas that needs to be liquefied from the network (PITL) is delivered to the associated terminals. As a reminder, the PITL are involved in the <cite>CtrBilanZone</cite> equation which is how this object is linked to the zone.</p>
+<p>Here is a summary of the main equations involved in the liquefaction process (at the PITL level):</p>
+<div class="math notranslate nohighlight">
+\[\text{Liquefied quantity (PITL)} \leq \text{Liquefaction capacity (PITL)} \times \text{Period}\]</div>
+<p>We also have the link between the terminal (TL) and the PITL:</p>
+<div class="math notranslate nohighlight">
+\[\text{Liquefied quantity (PITL)} = \sum\text{Liquefied quantity (TL)} \times \text{Efficiency (TL)}\]</div>
+<p>And finally, the liquefaction terminal works as follow. It’s a storage that has a capacity for loading liquefied gas and sending it to other TL:</p>
+<div class="math notranslate nohighlight">
+\[\text{Liquefied quantity (TL)} \leq \text{Liquefaction capacity (TL)} \times \text{Period}\]</div>
+<p>Where the liquefaction capacity is a mix between the capacity defined by the user (<em>capacité souscrite</em>) and the added capacity that can be contracted by the model (<em>capacité dispo</em>). We also have a similar upper bound for the total quantity (in MWh) that can be stored at the terminal:</p>
+<div class="math notranslate nohighlight">
+\[\text{Liquefied quantity (TL)} \leq \text{Liquefaction capacity (TL)}\]</div>
+<p>Where here the total capacity of the storage is fixed by the user. And finally, there is a flow equation that makes sure that the balance is respected at the terminal level.</p>
+<div class="math notranslate nohighlight">
+\[\text{Liquefied gas level (TL)}_{t} = \text{Liquefied gas level (TL)}_{t-1} + \text{Liquefied quantity (TL)}_{t} - \text{Liquefied sent to other terminals (TL)}_{t}\]</div>
+<p>Finally, the <cite>CtrEquilibreTMTL</cite> equation makes sure that everything that is liquefied is regasified (at the whole network level):</p>
+<div class="math notranslate nohighlight">
+\[\sum\text{Liquefied sent to other terminals (TL)} = \sum\text{Regasified from other terminals (TM)}\]</div>
+</section>
+<section id="regasification-process">
+<h3>Regasification process<a class="headerlink" href="#regasification-process" title="Link to this heading"></a></h3>
+<p>Once the gas is at the regasification terminal (TM), it still needs to be re-injected into the network. The regasification terminal is a storage that has a capacity for loading liquefied gas and the one from the prod:</p>
+<div class="math notranslate nohighlight" id="target-ctr-bilan-tm">
+\[\text{Regasified quantity (TM)} = \text{Regasification capacity from other terminals (TM)} + \text{Prod to TM}\]</div>
+<p>And,</p>
+<div class="math notranslate nohighlight">
+\[\text{Regasified level (TM)}_t \leq \text{Regasification level (TM)}_{t-1} + \text{Regasified quantity in (TM)}_t - \text{Regasified quantity out (TM)}_t\]</div>
+<p>And obviously there are some constraints on the capacity of what can go in and out of the terminal:</p>
+<div class="math notranslate nohighlight">
+\[\text{Regasified quantity in/out (TM)} \leq \text{Regasification capacity in/ou (TM)} \times \text{Period}\]</div>
+<p>Where the regasification capacity is a mix between the capacity defined by the user (<em>capacité souscrite</em>) and the added capacity that can be contracted by the model (<em>capacité dispo</em>). We also have a similar upper bound for the total quantity (in MWh) that can be stored at the terminal:</p>
+<div class="math notranslate nohighlight">
+\[\text{Regasified level (TM)} \leq \text{Regasification capacity (TM)}\]</div>
+<p>Where here the total capacity of the storage is again a mix between the capacity defined by the user (<em>capacité souscrite</em>) and the added capacity that can be contracted by the model (<em>capacité dispo</em>). There are also possibilities here to constraint the level of the storage of the TM by putting tunnels:</p>
+<div class="math notranslate nohighlight">
+\[\text{Regasification level min (TM)} \leq \text{Regasified level (TM)} \leq \text{Regasification level max (TM)}\]</div>
+<p>Finally, the TM is linked to the PTM (<cite>CtrBilanPTM</cite>) via the Regasified quantity that goes out of the TM (and thus in the PTM):</p>
+<div class="math notranslate nohighlight" id="target-ctr-bilan-ptm">
+\[\text{Regasified quantity (PTM)} = \text{Regasified quantity out (TM)} \times \text{Efficiency (TM)} + \sum\text{Prod to PTM} \times \text{Efficiency (PTM)}\]</div>
+<p>As a reminder, the PTM are involved in the <cite>CtrBilanZone</cite> equation which is how this object is linked to the zone. Be careful here because both the TM and the PTM are linked to the zone. The production can directly go in the TM or in the PTM. Yet, only the PTM is involved in the <cite>CtrBilanZone</cite> equation, which means that in order to fulfill the demand of gas, it must go through both the TM and then the PTM.</p>
+<p>Here is a detailed schematics of the model with the associated variables and equations:</p>
+<img alt="Detailed view of the LNG model" class="align-center" src="../../_images/Diagram_2.png" />
+<p>Finally, the objective function is impacted as follow:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    ObjFunction +&amp;= \sum \text{Regasified quantity (PTM)} \times \text{Regasified price (PTM)} \\
+                &amp;+ \sum \text{Capa TM} \times \text{Capa price TM} \\
+                &amp;+ \sum \text{Capa PTM} \times \text{Capa price PTM} \\
+                &amp;+ \sum \text{Liquefied quantity (TL)} \times \text{Liquefied price (TL)} \\
+                &amp;+ \sum \text{Liquefied capacity (TL)} \times \text{Capa price (TL)} \\
+\end{align*}\end{split}\]</div>
+</section>
+</section>
+<section id="excel-input-sheets">
+<h2>Excel input sheets<a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<section id="regasification-terminal">
+<h3>Regasification terminal<a class="headerlink" href="#regasification-terminal" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-ptm">
+<p class="admonition-title">PTM</p>
+<p><em>Sheet Description</em>: Point Terminal Méthanier (PTM)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+<col style="width: 2.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomPTM</p></th>
+<th class="head"><p>Zone</p></th>
+<th class="head"><p>Capacité souscrite en entrée [MWh/j]</p></th>
+<th class="head"><p>Capacité dispo en entrée [MWh/j]</p></th>
+<th class="head"><p>Part de la capacité d’entrée à mettre de côté pour le court terme [%]</p></th>
+<th class="head"><p>Mois démarrage capas annuelles</p></th>
+<th class="head"><p>Début modélisation capas annuelles entrée</p></th>
+<th class="head"><p>Début modélisation capas trimestrielles entrée</p></th>
+<th class="head"><p>Début modélisation capas mensuelles entrée</p></th>
+<th class="head"><p>Début modélisation capas journalières entrée</p></th>
+<th class="head"><p>Fin modélisation capas annuelles entrée</p></th>
+<th class="head"><p>Fin modélisation capas trimestrielles entrée</p></th>
+<th class="head"><p>Fin modélisation capas mensuelles entrée</p></th>
+<th class="head"><p>Fin modélisation capas journalières entrée</p></th>
+<th class="head"><p>Tarif Capacite entree [€/MWh/j]</p></th>
+<th class="head"><p>Tarif Variable entree [€/MWh]</p></th>
+<th class="head"><p>Gas-in-kind entrée [%]</p></th>
+<th class="head"><p>Multiplicateur trimestriel Tarif Capa d’entrée</p></th>
+<th class="head"><p>Multiplicateur mensuel Tarif Capa d’entrée</p></th>
+<th class="head"><p>Multiplicateur journalier Tarif Capa d’entrée</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q1</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q2</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q3</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q4</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Janvier</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Février</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Mars</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Avril</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Mai</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Juin</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Juillet</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Août</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Septembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Octobre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Novembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Décembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Janvier</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Février</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Mars</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Avril</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Mai</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Juin</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Juillet</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Août</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Septembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Octobre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Novembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Décembre</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name of the PTM (ex: Amber Grid | LT | Klaipeda LNG)</p></td>
+<td><p>Zone (ex: LT)</p></td>
+<td><p>Capacity subscribed at entry [MWh/d] (ex: Entree_Amber Grid | LT | Klaipeda LNG)</p></td>
+<td><p>Capacity available at entry [MWh/d] (ex: AddEntree_Amber Grid | LT | Klaipeda LNG)</p></td>
+<td><p>Share of the entry capacity to be set aside for the short term [%] (ex: 0)</p></td>
+<td><p>Month of start of annual capacities (ex: 10)</p></td>
+<td><p>Start of annual capacities modelling at entry (ex: 01/01/2020)</p></td>
+<td><p>Start of quarterly capacities modelling at entry (ex: 01/01/2020)</p></td>
+<td><p>Start of monthly capacities modelling at entry (ex: 01/01/2020)</p></td>
+<td><p>Start of daily capacities modelling at entry (ex: 01/01/2020)</p></td>
+<td><p>End of annual capacities modelling at entry (ex: 01/01/2100)</p></td>
+<td><p>End of quarterly capacities modelling at entry (ex: 01/01/2100)</p></td>
+<td><p>End of monthly capacities modelling at entry (ex: 01/01/2100)</p></td>
+<td><p>End of daily capacities modelling at entry (ex: 01/01/2100)</p></td>
+<td><p>Entry capacity tariff [€/MWh/d] (ex: 0.026191781)</p></td>
+<td><p>Variable entry tariff [€/MWh] (ex: 0)</p></td>
+<td><p>Gas-in-kind entry [%] (ex: 0)</p></td>
+<td><p>Quarterly entry capacity tariff multiplier (ex: 1.25)</p></td>
+<td><p>Monthly entry capacity tariff multiplier (ex: 1.5)</p></td>
+<td><p>Daily entry capacity tariff multiplier (ex: 2.25)</p></td>
+<td><p>Quarterly seasonal factor entry Q1 (ex: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q2 (ex: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q3 (ex: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q4 (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry January (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry February (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry March (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry April (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry May (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry June (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry July (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry August (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry September (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry October (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry November (ex: 1)</p></td>
+<td><p>Monthly seasonal factor entry December (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry January (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry February (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry March (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry April (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry May (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry June (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry July (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry August (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry September (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry October (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry November (ex: 1)</p></td>
+<td><p>Daily seasonal factor entry December (ex: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomPTM</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the PTM.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ Zone</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Zone.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="model_overview.html#target-zones"><span class="std std-ref">Zones</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité souscrite en entrée [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Capacity subscribed at entry.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité dispo en entrée [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Capacity available at entry. The model is free to chose between 0 and this capacity for increasing the already existing one.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Part de la capacité d’entrée à mettre de côté pour le court terme [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Share of the entry capacity to be set aside for the short term.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Mois démarrage capas annuelles</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Month of start of annual capacities.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas annuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start of annual capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas trimestrielles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start of quarterly capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas mensuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start of monthly capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas journalières entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start of daily capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas annuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End of annual capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas trimestrielles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End of quarterly capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas mensuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End of monthly capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas journalières entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End of daily capacities modelling at entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Capacite entree [€/MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Entry capacity tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh/d</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Variable entree [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable entry tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Gas-in-kind entrée [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Gas-in-kind entry.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur trimestriel Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Quarterly entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur mensuel Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur journalier Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q1</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Quarterly seasonal factor entry Q1.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q2</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Quarterly seasonal factor entry Q2.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q3</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Quarterly seasonal factor entry Q3.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q4</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Quarterly seasonal factor entry Q4.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry March.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry April.</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry June.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+<li><p><em>Description:</em> Monthly seasonal factor entry July.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry August.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry September.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Octobre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry November.</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Monthly seasonal factor entry December.</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry March.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry April.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry June.</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Juillet</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry July.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry August.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry September.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Octobre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry November.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Daily seasonal factor entry December.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-attm">
+<p class="admonition-title">ATTM</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the terminals. It’s the place where you can define the regasification terminals and their characteristics (mainly capacity and costs).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+<col style="width: 4.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomTerminal</p></th>
+<th class="head"><p>LNG node</p></th>
+<th class="head"><p>PTM</p></th>
+<th class="head"><p>Durée du bandeau (j)</p></th>
+<th class="head"><p>Mois de démarrage</p></th>
+<th class="head"><p>Capacité de déchargement (MWh/j)</p></th>
+<th class="head"><p>Capacité de regazéification (MWh/an)</p></th>
+<th class="head"><p>Capacité de stockage (MWh)</p></th>
+<th class="head"><p>% Capacités échouées [0;100]</p></th>
+<th class="head"><p>Tarif variable déchargement - capacités échouées (€/MWh)</p></th>
+<th class="head"><p>Tarif variable stock - capacités échouées (€/MWh)</p></th>
+<th class="head"><p>Tarif variable regaz - capacités échouées (€/MWh)</p></th>
+<th class="head"><p>Tarif capa regaz - souscription annuelle (€/(MWh/j)/j)</p></th>
+<th class="head"><p>Tarif capa stock - souscription annuelle (€/MWh/j)</p></th>
+<th class="head"><p>Tarif variable déchargement - souscription annuelle (€/MWh)</p></th>
+<th class="head"><p>Tarif variable stock - souscription annuelle (€/MWh)</p></th>
+<th class="head"><p>Tarif variable regaz - souscription annuelle (€/MWh)</p></th>
+<th class="head"><p>Tarif capa regaz - souscription périodique (€/(MWh/j)/j)</p></th>
+<th class="head"><p>Tarif capa stock - souscription périodique (€/MWh/j)</p></th>
+<th class="head"><p>Tarif variable déchargement - souscription périodique (€/MWh)</p></th>
+<th class="head"><p>Tarif variable stock - souscription périodique (€/MWh)</p></th>
+<th class="head"><p>Tarif variable regaz - souscription périodique (€/MWh)</p></th>
+<th class="head"><p>% Gaz carburant [0;100]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Terminal Name (ex: Klaipeda LNG)</p></td>
+<td><p>LNG node (ex: LNG_LT)</p></td>
+<td><p>PTM (ex: Amber Grid | LT | Klaipeda LNG)</p></td>
+<td><p>Duration of the band (days) (ex: 0)</p></td>
+<td><p>Start month (ex: 10)</p></td>
+<td><p>Unloading capacity (MWh/d) (ex: 1,000,000)</p></td>
+<td><p>Regasification capacity (MWh/y) (ex: 44,496,117)</p></td>
+<td><p>Storage capacity (MWh) (ex: 1,169,294)</p></td>
+<td><p>% Failed capacities [0;100] (ex: Pourcent_CapaEchouee_Klaipeda LNG)</p></td>
+<td><p>Variable unloading tariff - failed capacities (€/MWh) (ex: 0)</p></td>
+<td><p>Variable storage tariff - failed capacities (€/MWh) (ex: 0)</p></td>
+<td><p>Variable regasification tariff - failed capacities (€/MWh) (ex: 0.10)</p></td>
+<td><p>Regasification capacity tariff - annual subscription (€/(MWh/d)/d) (ex: 0)</p></td>
+<td><p>Storage capacity tariff - annual subscription (€/MWh/d) (ex: 0)</p></td>
+<td><p>Variable unloading tariff - annual subscription (€/MWh) (ex: 0)</p></td>
+<td><p>Variable storage tariff - annual subscription (€/MWh) (ex: 0)</p></td>
+<td><p>Variable regasification tariff - annual subscription (€/MWh) (ex: 0.10)</p></td>
+<td><p>Regasification capacity tariff - periodic subscription (€/(MWh/d)/d) (ex: 0)</p></td>
+<td><p>Storage capacity tariff - periodic subscription (€/MWh/d) (ex: 0)</p></td>
+<td><p>Variable unloading tariff - periodic subscription (€/MWh) (ex: 0)</p></td>
+<td><p>Variable storage tariff - periodic subscription (€/MWh) (ex: 0)</p></td>
+<td><p>Variable regasification tariff - periodic subscription (€/MWh) (ex: 0.10)</p></td>
+<td><p>% Fuel gas [0;100] (ex: 0.9)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomTerminal</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the terminal.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description:</em> LNG node.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="shipping.html#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PTM</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the PTM.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="#target-ptm"><span class="std std-ref">PTM</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Durée du bandeau (j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Duration of the band (days).</p></li>
+<li><p><em>Unit:</em> Days</p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Mois de démarrage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start month.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de déchargement (MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Unloading capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-tm-par-date"><span class="std std-ref">CapaTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de regazéification (MWh/an)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Regasification capacity.</p></li>
+<li><p><em>Unit:</em> MWh/y</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-tm-par-date"><span class="std std-ref">CapaTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de stockage (MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Storage capacity.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-tm-par-date"><span class="std std-ref">CapaTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ % Capacités échouées [0;100]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Percentage of the total capacity already booked at the beginning of the horizon.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable déchargement - capacités échouées (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable unloading tariff - capacities already booked at the beginning of the horizon.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable stock - capacités échouées (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable storage tariff - capacities already booked at the beginning of the horizon.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable regaz - capacités échouées (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable regasification tariff - capacities already booked at the beginning of the horion.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif capa regaz - souscription annuelle (€/(MWh/j)/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Regasification capacity tariff - annual subscription.</p></li>
+<li><p><em>Unit:</em> €/(MWh/d)/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif capa stock - souscription annuelle (€/MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Storage capacity tariff - annual subscription.</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable déchargement - souscription annuelle (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable unloading tariff - annual subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable stock - souscription annuelle (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable storage tariff - annual subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable regaz - souscription annuelle (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable regasification tariff - annual subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+<li><p><em>Description:</em> Regasification capacity tariff - periodic subscription.</p></li>
+<li><p><em>Unit:</em> €/(MWh/d)/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif capa stock - souscription périodique (€/MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Unit:</em> €/MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable déchargement - souscription périodique (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable unloading tariff - periodic subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable stock - souscription périodique (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable storage tariff - periodic subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif variable regaz - souscription périodique (€/MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable regasification tariff - periodic subscription.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tm-par-date"><span class="std std-ref">TarifTMParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ % Gaz carburant [0;100]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Percentage of the gas used to fuel the regasification process. Putting 0 will assume that all the liquid that has been received will be turned into gas. Putting 1 on the contrary will assumed that nothing will be received.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-remplissagetmfinal">
+<p class="admonition-title">RemplissageTMFinal</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the final level of the regasification terminal.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name of the Terminal (ex: Klaipeda LNG)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Value of the filling quantity at the end of the horizon (ex: 5 000 MWh)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="error admonition" id="target-maintenanceregaz">
+<p class="admonition-title">MaintenanceRegaz</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the maintenance of the regasification terminal.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomTerminal</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Debut</p></th>
+<th class="head"><p>Fin</p></th>
+<th class="head"><p>Capa restante [MWh/j]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Terminal Name (ex: Klaipeda LNG)</p></td>
+<td><p>Direction (ex: Unloading)</p></td>
+<td><p>Start (ex: 01/01/2020)</p></td>
+<td><p>End (ex: 01/01/2020)</p></td>
+<td><p>Remaining capacity [MWh/d] (ex: 0)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomTerminal</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the terminal.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="#target-attm"><span class="std std-ref">ATTM</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Direction</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Direction.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must be either “Unloading” or “Send-out”.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Debut</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capa restante [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Remaining capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+<section id="liquefaction-terminal">
+<h3>Liquefaction terminal<a class="headerlink" href="#liquefaction-terminal" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-lique">
+<p class="admonition-title">Lique</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the terminals. It’s the place where you can define the liquefaction terminals and their characteristics (mainly capacity and costs).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+<col style="width: 8.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>LNG node</p></th>
+<th class="head"><p>PITL</p></th>
+<th class="head"><p>Capacité max de liquéfaction (MWh/j)</p></th>
+<th class="head"><p>Capacité de stockage (MWh)</p></th>
+<th class="head"><p>Capacité de chargement (MWh/j)</p></th>
+<th class="head"><p>Capacité de liquéfaction FID (MWh/j)</p></th>
+<th class="head"><p>Investissement autorisé {0,1}</p></th>
+<th class="head"><p>CAPEX (€/MWh de capa de liquéfaction journalière)</p></th>
+<th class="head"><p>OPEX variable (€/MWh liquéfié)</p></th>
+<th class="head"><p>% Gaz carburant [0;100]</p></th>
+<th class="head"><p>Durée de vie (années)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Terminal Name (ex: Klaipeda LNG)</p></td>
+<td><p>LNG node (ex: LNG_LT)</p></td>
+<td><p>PITL (ex: Amber Grid | LT | Klaipeda LNG)</p></td>
+<td><p>Maximum liquefaction capacity (MWh/d) (ex: 1,000,000)</p></td>
+<td><p>Storage capacity (MWh) (ex: 1,169,294)</p></td>
+<td><p>Loading capacity (MWh/d) (ex: 1,000,000)</p></td>
+<td><p>FID liquefaction capacity (MWh/d) (ex: 500,000)</p></td>
+<td><p>Authorized investment {0,1} (ex: 1)</p></td>
+<td><p>CAPEX (€/MWh of daily liquefaction capacity) (ex: 100)</p></td>
+<td><p>Variable OPEX (€/MWh liquefied) (ex: 0.10)</p></td>
+<td><p>% Fuel gas [0;100] (ex: 0.9)</p></td>
+<td><p>Lifetime (years) (ex: 20)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nom</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the terminal.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description:</em> LNG node.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="shipping.html#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PITL</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the PITL.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="#target-pitl"><span class="std std-ref">PITL</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité max de liquéfaction (MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Maximum liquefaction capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-lique-par-date"><span class="std std-ref">CapaLiqueParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de stockage (MWh)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Storage capacity.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-lique-par-date"><span class="std std-ref">CapaLiqueParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de chargement (MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Loading capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-lique-par-date"><span class="std std-ref">CapaLiqueParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité de liquéfaction FID (MWh/j)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> FID liquefaction capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-lique-par-date"><span class="std std-ref">CapaLiqueParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Investissement autorisé {0,1}</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Authorized investment.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Boolean or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-lique-par-date"><span class="std std-ref">CapaLiqueParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ CAPEX (€/MWh de capa de liquéfaction journalière)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> CAPEX.</p></li>
+<li><p><em>Unit:</em> €/MWh of daily liquefaction capacity</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tl-par-date"><span class="std std-ref">TarifTLParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ OPEX variable (€/MWh liquéfié)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Variable OPEX.</p></li>
+<li><p><em>Unit:</em> €/MWh liquefied</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-tarif-tl-par-date"><span class="std std-ref">TarifTLParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ % Gaz carburant [0;100]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Percentage of the gas that will be used to fuel the liquefaction process. Putting 0 will assume that all the gas that has been received will be turned into LNG. Putting 1 on the contrary will assumed that nothing will be liquefied.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Durée de vie (années)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Lifetime.</p></li>
+<li><p><em>Unit:</em> Years</p></li>
+<li><p><em>Validity:</em> Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-pitl">
+<p class="admonition-title">PITL</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the PITL (Point d’Interconnexion Terrestre de Liquéfaction [Not Sure]).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>Zone</p></th>
+<th class="head"><p>Capacité au point de sortie [MWh/j]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name (ex: DZ | PITL_Arzew-Skikda)</p></td>
+<td><p>Zone (ex: DZ)</p></td>
+<td><p>Capacity at the delivery point (ex: 995,572)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nom</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the PITL.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String</p></li>
+</ul>
+</dd>
+<dt>⚙️ Zone</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Zone.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="model_overview.html#target-zones"><span class="std std-ref">Zones</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité au point de sortie [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Capacity at the delivery point.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-maintenance-lique">
+<p class="admonition-title">MaintenanceLique</p>
+<p><em>Sheet Description</em>: This sheet contains the information about the maintenance of the liquefaction terminal.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Debut</p></th>
+<th class="head"><p>Fin</p></th>
+<th class="head"><p>% Capa réduite</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Terminal Name (ex: DZ | Lique_Arzew-Skikda)</p></td>
+<td><p>Direction (ex: Lique)</p></td>
+<td><p>Start (ex: 01/01/2020)</p></td>
+<td><p>End (ex: 29/02/2020)</p></td>
+<td><p>Share of reduced capacity (%) (ex: 18)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nom</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Name of the terminal.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must refer to a value defined in the <a class="reference internal" href="#target-lique"><span class="std std-ref">Lique</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Direction</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Direction.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. It must be “Lique”.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Debut</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Start.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> End.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date</p></li>
+</ul>
+</dd>
+<dt>⚙️ % Capa réduite</dt><dd><ul class="simple">
+<li><p><em>Description:</em> Share of reduced capacity.</p></li>
+<li><p><em>Unit:</em> Percentage</p></li>
+<li><p><em>Validity:</em> Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="market.html" class="btn btn-neutral float-left" title="Markets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pipeline.html" class="btn btn-neutral float-right" title="Pipelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Feb 24, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,765 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shipping &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/layout.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Time Series" href="time_series.html" />
+    <link rel="prev" title="SDDP" href="sddp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model_overview.html">Model Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demand.html">Demand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="production.html">Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="market.html">Markets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lng.html">LNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sddp.html">SDDP</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shipping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="time_series.html">Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cats.html">Cats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output/index.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Model</a></li>
+      <li class="breadcrumb-item active">Shipping</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/model/shipping.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shipping">
+<span id="target-shipping-module"></span><h1>Shipping<a class="headerlink" href="#shipping" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#excel-input-sheets" id="id1">Excel input sheets</a></p></li>
+</ul>
+</nav>
+<section id="excel-input-sheets">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Excel input sheets</a><a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<div class="error admonition" id="target-lng-nodes">
+<p class="admonition-title">LNGNodes</p>
+<p><em>Sheet Description</em>: The notion of LNG Nodes differs from the concept of zones. Here a LNG Nodes should be seen as a physical location where LNG can be loaded or unloaded. The LNG Nodes are defined by the user and can be used to define the shipping routes between them.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nodes</p></th>
+<th class="head"><p>Max nb vessels</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nodes (eg: LNG_AE)</p></td>
+<td><p>Maximum number of vessels (eg: 37)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nodes</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Max nb vessels</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Maximum number of vessels that can be loaded or unloaded at the node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-shipping-dist">
+<p class="admonition-title">ShippingDist</p>
+<p><em>Sheet Description</em>: This sheet defines the distance between the origin and destination LNG nodes in nautical miles.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Origin</p></th>
+<th class="head"><p>Destination</p></th>
+<th class="head"><p>Distance [nm]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Origin (eg: LNG_AE)</p></td>
+<td><p>Destination (eg: LNG_AO)</p></td>
+<td><p>Distance in nautical miles (eg: 6555)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Origin</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the origin LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Destination</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the destination LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Distance [nm]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Distance between the origin and destination in nautical miles. 1 nautical miles is equal to 1.852 km.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-vessels">
+<p class="admonition-title">Vessels</p>
+<p><em>Sheet Description</em>: This sheet defines the characteristics of the vessels that can be used to transport LNG between the LNG nodes.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+<col style="width: 14.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Capacity hold [MWh]</p></th>
+<th class="head"><p>Speed [kn]</p></th>
+<th class="head"><p>BOR [%]</p></th>
+<th class="head"><p>Charter cost [€/MWh of Capacity/day]</p></th>
+<th class="head"><p>Average cargo size [MWh]</p></th>
+<th class="head"><p>Initial Laden Share</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type (eg: ARC7)</p></td>
+<td><p>Capacity of the hold in MWh (eg: 17,514,435)</p></td>
+<td><p>Speed in knots (eg: 16)</p></td>
+<td><p>Boil off rate in % (eg: 0.12%)</p></td>
+<td><p>Charter cost in €/MWh of capacity per day (eg: 0)</p></td>
+<td><p>Average cargo size in MWh (eg: 1,144,913)</p></td>
+<td><p>Initial laden share in % (eg: 60%)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacity hold [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Capacity of the hold in MWh.</p></li>
+<li><p><em>Unit</em>: MWh</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Speed [kn]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Speed of the vessel in knots. One knot is equal to 1.852 km/h.</p></li>
+<li><p><em>Unit</em>: knots</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ BOR [%]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Boil off rate in %.</p></li>
+<li><p><em>Unit</em>: %</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Charter cost [€/MWh of Capacity/day]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Charter cost in €/MWh of capacity per day.</p></li>
+<li><p><em>Unit</em>: €/MWh of capacity per day</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Average cargo size [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Average cargo size in MWh.</p></li>
+<li><p><em>Unit</em>: MWh</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Initial Laden Share</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Initial laden share in %.</p></li>
+<li><p><em>Unit</em>: %</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-lng-nodes-accept">
+<p class="admonition-title">LNGNodesAccept</p>
+<p><em>Sheet Description</em>: This sheet defines the acceptance of the LNG nodes to import and export LNG.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nodes</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Accept import</p></th>
+<th class="head"><p>Accept export</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nodes (eg: LNG_AE)</p></td>
+<td><p>Type (eg: Q-Flex)</p></td>
+<td><p>Accept import (eg: 1)</p></td>
+<td><p>Accept export (eg: 0)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nodes</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Accept import</dt><dd><ul class="simple">
+<li><p><em>Description</em>: 1 if the node can accept import, 0 otherwise.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer</p></li>
+</ul>
+</dd>
+<dt>⚙️ Accept export</dt><dd><ul class="simple">
+<li><p><em>Description</em>: 1 if the node can accept export, 0 otherwise.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-vessels-restrictions">
+<p class="admonition-title">VesselsRestrictions</p>
+<p><em>Sheet Description</em>: This sheet defines the acceptance of the vessels to follow a specific route.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Origin</p></th>
+<th class="head"><p>Destination</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Accept</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Origin (eg: LNG_BELUX)</p></td>
+<td><p>Destination (eg: LNG_RU-Urals)</p></td>
+<td><p>Type (eg: ARC7)</p></td>
+<td><p>Accept (eg: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Origin</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the origin LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Destination</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the destination LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Accept</dt><dd><ul class="simple">
+<li><p><em>Description</em>: 1 if the vessel can accept the route, 0 otherwise.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-addit-shipping">
+<p class="admonition-title">AdditShipping</p>
+<p><em>Sheet Description</em>: This sheet defines the additional shipping capacity for each vessel type and LNG node.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Vessel type</p></th>
+<th class="head"><p>LNG node</p></th>
+<th class="head"><p>Period1</p></th>
+<th class="head"><p>Period2</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vessel type (eg: ARC7)</p></td>
+<td><p>LNG node (eg: LNG_RU-Urals)</p></td>
+<td><p>01/01/2020 (eg: 0)</p></td>
+<td><p>02/02/2020 (eg: 1 200 000)</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Vessel type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Period1, Period2, …</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Additional shipping capacity for each period. The capacity is in MWh/day.</p></li>
+<li><p><em>Unit</em>: MWh/day</p></li>
+<li><p><em>Validity</em>: Float. The periods must be defined in the <a class="reference internal" href="model_overview.html#target-horizon"><span class="std std-ref">Horizon</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-canal-cost">
+<p class="admonition-title">CanalCost</p>
+<p><em>Sheet Description</em>: This sheet defines the cost of the canal for each vessel type and LNG node.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>LNG node</p></th>
+<th class="head"><p>Vessel type</p></th>
+<th class="head"><p>Cost laden [€/MWh of Capacity]</p></th>
+<th class="head"><p>Cost ballast [€/MWh of Capacity]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LNG node (eg: LNG_Panama)</p></td>
+<td><p>Vessel type (eg: ARC7)</p></td>
+<td><p>Cost laden in €/MWh of capacity (eg: 0.32)</p></td>
+<td><p>Cost ballast in €/MWh of capacity (eg: 0.29)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Vessel type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Cost laden [€/MWh of Capacity]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Cost in €/MWh of capacity when the vessel is laden.</p></li>
+<li><p><em>Unit</em>: €/MWh of capacity</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ Cost ballast [€/MWh of Capacity]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Cost in €/MWh of capacity when the vessel is in ballast.</p></li>
+<li><p><em>Unit</em>: €/MWh of capacity</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-transit-capacity">
+<p class="admonition-title">TransitCapacity</p>
+<p><em>Sheet Description</em>: This sheet defines the maximum number of vessels that can transit each LNG node in each period.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>LNG node</p></th>
+<th class="head"><p>Period1</p></th>
+<th class="head"><p>Period2</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LNG node (eg: LNG_Panama)</p></td>
+<td><p>01/01/2020 (eg: 2)</p></td>
+<td><p>02/02/2020 (eg: 4)</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Period1, Period2, …</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Maximum number of vessels that can transit the node in each period.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer. The periods must be defined in the <a class="reference internal" href="model_overview.html#target-horizon"><span class="std std-ref">Horizon</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-route-unavailable">
+<p class="admonition-title">RouteUnavailable</p>
+<p><em>Sheet Description</em>: This sheet defines the routes that are unavailable between the origin and destination LNG nodes in each period.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Origin</p></th>
+<th class="head"><p>Destination</p></th>
+<th class="head"><p>Period1</p></th>
+<th class="head"><p>Period2</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Origin (eg: LNG_RU-Urals)</p></td>
+<td><p>Destination (eg: LNG_CN)</p></td>
+<td><p>01/01/2020 (eg: 1)</p></td>
+<td><p>02/02/2020 (eg: 0)</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Origin</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the origin LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Destination</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the destination LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Period1, Period2, …</dt><dd><ul class="simple">
+<li><p><em>Description</em>: 1 if the route is unavailable, 0 otherwise.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Integer. The periods must be defined in the <a class="reference internal" href="model_overview.html#target-horizon"><span class="std std-ref">Horizon</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-transhipment">
+<p class="admonition-title">Transhipment</p>
+<p><em>Sheet Description</em>: This sheet defines the transhipment costs between the source and destination vessel types at each LNG node.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>LNG node</p></th>
+<th class="head"><p>Source Vessel Type</p></th>
+<th class="head"><p>Destination Vessel Type</p></th>
+<th class="head"><p>Unit cost [€/MWh]</p></th>
+<th class="head"><p>BOR</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LNG node (eg: LNG_BELUX)</p></td>
+<td><p>Source Vessel Type (eg: ARC7)</p></td>
+<td><p>Destination Vessel Type (eg: ARC4)</p></td>
+<td><p>Unit cost in €/MWh (eg: 0.2)</p></td>
+<td><p>Boil off rate in % (eg: 0.5)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ LNG node</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Source Vessel Type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the source vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Destination Vessel Type</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the destination vessel type.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the types defined in the <a class="reference internal" href="#target-vessels"><span class="std std-ref">Vessels</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Unit cost [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Unit cost in €/MWh.</p></li>
+<li><p><em>Unit</em>: €/MWh</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+<dt>⚙️ BOR</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Boil off rate in %.</p></li>
+<li><p><em>Unit</em>: %</p></li>
+<li><p><em>Validity</em>: Float</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-lng-contracts">
+<p class="admonition-title">LNGContracts</p>
+<p><em>Sheet Description</em>: This sheet defines the contracts between the origin and destination LNG nodes. The contract model a quantity of gas that must transit from one node to another.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Contract</p></th>
+<th class="head"><p>PeriodeDebut</p></th>
+<th class="head"><p>PeriodeFin</p></th>
+<th class="head"><p>ACQ</p></th>
+<th class="head"><p>DCQ min</p></th>
+<th class="head"><p>DCQ max</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Contract (eg: LNG_DZ&gt;FR)</p></td>
+<td><p>Start period (eg: 01/01/2014)</p></td>
+<td><p>End period (eg: 01/01/2023)</p></td>
+<td><p>Annual Contract Quantity (eg: 36,570,000)</p></td>
+<td><p>Minimum DCQ (eg: DCQmin_LNG_DZ&gt;FR)</p></td>
+<td><p>Maximum DCQ (eg: 1,500,000)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Contract</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the contract.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PeriodeDebut</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Start period of the contract.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PeriodeFin</dt><dd><ul class="simple">
+<li><p><em>Description</em>: End period of the contract.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ ACQ</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Annual Contract Quantity in MWh.</p></li>
+<li><p><em>Unit</em>: MWh</p></li>
+<li><p><em>Validity</em>: Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-acq-par-date"><span class="std std-ref">ACQParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ min</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Minimum Daily Contract Quantity in MWh/day.</p></li>
+<li><p><em>Unit</em>: MWh/day</p></li>
+<li><p><em>Validity</em>: Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-dcq-par-pdt"><span class="std std-ref">DCQParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ DCQ max</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Maximum Daily Contract Quantity in MWh/day.</p></li>
+<li><p><em>Unit</em>: MWh/day</p></li>
+<li><p><em>Validity</em>: Float or String. If String, then it must refer to a value defined in the <a class="reference internal" href="time_series.html#target-dcq-par-pdt"><span class="std std-ref">DCQParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-contract-routes">
+<p class="admonition-title">ContractRoutes</p>
+<p><em>Sheet Description</em>: This sheet defines the routes between the origin and destination LNG nodes for each contract.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Contract</p></th>
+<th class="head"><p>Origin</p></th>
+<th class="head"><p>Destination</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Contract (eg: LNG_DZ&gt;FR)</p></td>
+<td><p>Origin (eg: LNG_DZ)</p></td>
+<td><p>Destination (eg: LNG_FR)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Contract</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the contract.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the contracts defined in the <a class="reference internal" href="#target-lng-contracts"><span class="std std-ref">LNGContracts</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Origin</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the origin LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Destination</dt><dd><ul class="simple">
+<li><p><em>Description</em>: Name of the destination LNG node.</p></li>
+<li><p><em>Unit</em>: <em>None</em></p></li>
+<li><p><em>Validity</em>: String. Must be part of the nodes defined in the <a class="reference internal" href="#target-lng-nodes"><span class="std std-ref">LNGNodes</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sddp.html" class="btn btn-neutral float-left" title="SDDP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="time_series.html" class="btn btn-neutral float-right" title="Time Series" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Feb 24, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

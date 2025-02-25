@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/layout.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Model" href="../model/index.html" />
+    <link rel="prev" title="Installation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-steps">Installation Steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#clone-the-cactus-git-repository">Clone the Cactus git repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-virtual-environment">Python virtual environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tableau-postgres">Tableau/Postgres</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#test">Test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../model/index.html">Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output/index.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Installation</a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/installation/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.8.10 (<a class="reference external" href="https://www.python.org/ftp/python/3.8.10/python-3.8.10-amd64.exe">installer</a>)</p></li>
+<li><p>GAMS 45.7 (<a class="reference external" href="https://d37drm4t2jghv5.cloudfront.net/distributions/45.7.0/windows/windows_x64_64.exe">installer</a>)</p></li>
+<li><p>Git (<a class="reference external" href="https://git-scm.com/download/win">installer</a>)</p></li>
+<li><p>IDE (e.g., VS Code) (<a class="reference external" href="https://code.visualstudio.com/download">installer</a>)</p></li>
+<li><p>Tableau (executable given with the license for the software Tableau Desktop). The example of Tableau file is located in <cite>cactus2postgresql/Cactus_Tableau.twb</cite></p></li>
+<li><p>PostgreSQL (WARNING YOU NEED ADMIN RIGHTS) (<a class="reference external" href="https://www.enterprisedb.com/postgresql-tutorial-resources-training-2?uuid=d732dc13-c15a-484b-b783-307823940a11&amp;campaignId=Product_Trial_PostgreSQL_16">installer</a>). Please note that at some point a password will be asked. First, note this password carefully, and then please use a simple password without any special characters (as it’s only for a local database there is no need to put a very robust password). Indeed, you will see that later on such password will be asked and putting special characters will create some issues. So please, use a simple password without special characters.
+- For your information, installing PostgreSQL will also install pgAdmin, which will be used to create and manage your PostgreSQL databases.</p></li>
+<li><p>Request the rights to <a class="reference external" href="https://github.tools.digital.engie.com/GEM3mv/Cactus">Cactus’ repository</a>. Ping Raphaël LASRY, Paul BARBERI or Roman SIMCIK for instance.</p></li>
+</ul>
+</section>
+<section id="installation-steps">
+<h2>Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading"></a></h2>
+<section id="clone-the-cactus-git-repository">
+<h3>Clone the Cactus git repository<a class="headerlink" href="#clone-the-cactus-git-repository" title="Link to this heading"></a></h3>
+<p>Create a folder in C:\Data\workspace\. Open then a terminal (press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">⊞</kbd> <kbd class="kbd docutils literal notranslate">Win</kbd></kbd> and search cmd). Then write <cite>cd C:\Data\workspace`</cite></p>
+<dl class="simple">
+<dt>Clone then the repository by pasting the following in your terminal:</dt><dd><ul class="simple">
+<li><p>git clone <a class="reference external" href="https://github.tools.digital.engie.com/GEM3mv/Cactus.git">https://github.tools.digital.engie.com/GEM3mv/Cactus.git</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>If at some point you want to commit directly into Cactus’ repository, you will have to create your own fork. To do so, please click here:</p>
+<img alt="Fork" class="align-center" src="../../_images/Fork.png" />
+<dl class="simple">
+<dt>And clone the repo with your fork:</dt><dd><ul class="simple">
+<li><p>git clone <a class="reference external" href="https://github.tools.digital.engie.com/%YOUR_GAIA%/Cactus.git">https://github.tools.digital.engie.com/%YOUR_GAIA%/Cactus.git</a></p></li>
+</ul>
+</dd>
+</dl>
+<p>where %YOUR_GAIA% is your ENGIE’s ID.</p>
+</section>
+<section id="python-virtual-environment">
+<h3>Python virtual environment<a class="headerlink" href="#python-virtual-environment" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Add the following paths to the PATH environment variable:</dt><dd><ul class="simple">
+<li><p>C:\Python38\</p></li>
+<li><p>C:\Python38\Scripts</p></li>
+</ul>
+</dd>
+</dl>
+<p>To do so, press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">⊞</kbd> <kbd class="kbd docutils literal notranslate">Win</kbd></kbd> and search Edit environment variables for your account, look for the variable called PATH, edit it and add the two paths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following instructions are explaining a way to manage virtual environments, but fell free to use any other way (direct management within an IDE, pipenv/poetry tools, etc.) that you are comfortable to use, as soon as you use the requirements.txt file.</p>
+</div>
+<p>Open then a terminal (press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">⊞</kbd> <kbd class="kbd docutils literal notranslate">Win</kbd></kbd> and search cmd). Then write cd C:\Data\workspace. Install virtualenv by running:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>pip install virtualenv virtualenvwrapper-win</p></li>
+<li><p>python -m pip install –upgrade pip</p></li>
+<li><p>pip install setuptools -U</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Create a new environment and deactivate it directly.</dt><dd><ul class="simple">
+<li><p>mkvirtualenv -p 3.8 -a C:\Data\workspace\cactus cactus38</p></li>
+<li><p>deactivate</p></li>
+</ul>
+</dd>
+</dl>
+<p>Please copy and paste the following code at the end of the file activate.bat. Such file is located here normally C:\Users\YOUR_GAIA_ID\Envs\cactus38\Scripts.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>REM Define specific environment variables for Cactus project</p></li>
+<li><p>set ORIGIN_PATH=%PATH%</p></li>
+<li><p>set GAMSDIR=C:\GAMS\45\</p></li>
+<li><p>set PATH=%PATH%;%GAMSDIR%</p></li>
+</ul>
+</div></blockquote>
+<p>Open then the deactivate.bat script and copy paste at the end of the file the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>REM Remove specific environment variables for Cactus project</p></li>
+<li><p>set GAMSDIR=</p></li>
+<li><p>set PATH=%ORIGIN_PATH%</p></li>
+</ul>
+</div></blockquote>
+<p>You can now open your interpreter and activate your virtual environment by pressing:</p>
+<p><em>workon cactus38</em></p>
+<dl class="simple">
+<dt>Let’s install the packages, you can enter the following commands:</dt><dd><ul class="simple">
+<li><p>pip install -r C:\Data\workspace\cactus\requirements.txt</p></li>
+<li><p>pip install -e C:\Data\workspace\Cactus</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="tableau-postgres">
+<h3>Tableau/Postgres<a class="headerlink" href="#tableau-postgres" title="Link to this heading"></a></h3>
+<p><strong>Create a local database</strong>
+Open pgAdmin and click Add New Server:</p>
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg1.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg2.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg3.png" />
+<p>Save</p>
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg4.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg5.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg6.png" />
+<p>Save, then do the same with cactus_rw</p>
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg7.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg8.png" />
+<p>Save</p>
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg9.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg10.png" />
+<p>Do this for both <a class="reference external" href="https://engie.sharepoint.com/sites/CactusS-ImpactTeam/SharedDocuments/ImpactTeam/Cactus2024/Training/Wiki/zone_mapping">zone_mapping</a> and <a class="reference external" href="https://engie.sharepoint.com/sites/CactusS-ImpactTeam/SharedDocuments/ImpactTeam/Cactus2024/Training/Wiki/asset_mapping_v41">asset_mapping_v41</a> files.</p>
+<p>Congratulations, your local database is created and it contains the minimum information to connect to the Tableau Dashboard.</p>
+<p><strong>Connect to the shared database</strong></p>
+<p><em>Info</em>:
+host: dtcoprdpgs016l.pld.infrasys16.com
+Port: 5432
+DB: cactustableau
+logins: user cactus_rw
+password : rZKLcqrrzs5kLFNnzHT8LwQXr5zfUSUW</p>
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg11.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg12.png" />
+<img alt="pgAdmin" class="align-center" src="../../_images/Pg13.png" />
+<p>Save
+Congratulations, you have access to the shared database!</p>
+<p><strong>Link Tableau with a database</strong></p>
+<p>In Tableau, go to Data (banner at the top) and then New Data Source, select postgresql</p>
+<img alt="Tableau" class="align-center" src="../../_images/Tableau1.png" />
+<p>Fill in the information and then sign in. Once this is done, we can now view a table from the database in Tableau as follows (Go to Data Source (bottom left)):</p>
+<img alt="Tableau" class="align-center" src="../../_images/Tableau2.png" />
+<p>Click on Migrated Data &lt; Open</p>
+<img alt="Tableau" class="align-center" src="../../_images/Tableau3.png" />
+<p>Drag &amp; Drop the table (here for example raph_test) that is on the left in the Table part to the Migrated Data. (Be careful, here you have to place the new table on top of the old one). At this step of the installation process you shouldn’t have yet a table. Please come back to this step just after testing a run.</p>
+</section>
+</section>
+<section id="test">
+<h2>Test<a class="headerlink" href="#test" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>In order to check that your installation is working properly, we will do the following test:</dt><dd><ol class="arabic simple">
+<li><p>Edit the file config.json that is located in the cactus2postgresql with the information of your local database.</p></li>
+<li><p>Activate your environment (workon cactus38).</p></li>
+<li><p>Create an empty folder here: C:\GAMS\CactusResults</p></li>
+<li><p>Launch the following command at the root of Cactus repo (where the main.py file is located): <em>python main.py -d “documentation/installations” -i “example.xlsx” -c “cats.xml” -o “output.xlsx” –e</em></p></li>
+<li><p>When the run is done, a pop-up window should appear and you can click on Start importing file.</p></li>
+</ol>
+</dd>
+</dl>
+<p>Once it’s done, you can open Tableau, link the newly created table and visualize the results. If everything went well, in the balance CAL sheet you should see the following table:</p>
+<img alt="Tableau" class="align-center" src="../../_images/Tableau4.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../model/index.html" class="btn btn-neutral float-right" title="Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Feb 24, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

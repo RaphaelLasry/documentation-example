@@ -1,0 +1,1455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storage &mdash; Cactus  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/layout.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SDDP" href="sddp.html" />
+    <link rel="prev" title="Pipelines" href="pipeline.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/cactus-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Module's documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model_overview.html">Model Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demand.html">Demand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="production.html">Production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="market.html">Markets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lng.html">LNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-introduction">General introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-description-and-model-assumptions">Technical description and model assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#excel-input-sheets">Excel input sheets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gas-storage">Gas storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#storage-constraints-used-in-cats-algorithm">Storage constraints used in CATS algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sddp.html">SDDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shipping.html">Shipping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_series.html">Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cats.html">Cats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output/index.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Model</a></li>
+      <li class="breadcrumb-item active">Storage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/model/storage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="storage">
+<h1>Storage<a class="headerlink" href="#storage" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-introduction" id="id1">General introduction</a></p></li>
+<li><p><a class="reference internal" href="#technical-description-and-model-assumptions" id="id2">Technical description and model assumptions</a></p></li>
+<li><p><a class="reference internal" href="#excel-input-sheets" id="id3">Excel input sheets</a></p>
+<ul>
+<li><p><a class="reference internal" href="#gas-storage" id="id4">Gas storage</a></p></li>
+<li><p><a class="reference internal" href="#storage-constraints-used-in-cats-algorithm" id="id5">Storage constraints used in CATS algorithm</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="general-introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">General introduction</a><a class="headerlink" href="#general-introduction" title="Link to this heading"></a></h2>
+<p>The goal of this module is to introduce a storage where the produced gas could be stored and withdrawn later. These objects are actually one of the most important in the model as it often represent tension points on the system, and one of the key questions that gas analysts have to answer regards the level of storages.</p>
+<img alt="Focus on Storages" class="align-center" src="../../_images/Diagram_16.png" />
+</section>
+<section id="technical-description-and-model-assumptions">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Technical description and model assumptions</a><a class="headerlink" href="#technical-description-and-model-assumptions" title="Link to this heading"></a></h2>
+</section>
+<section id="excel-input-sheets">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Excel input sheets</a><a class="headerlink" href="#excel-input-sheets" title="Link to this heading"></a></h2>
+<section id="gas-storage">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Gas storage</a><a class="headerlink" href="#gas-storage" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-ats">
+<p class="admonition-title">ATS</p>
+<p><em>Sheet Description</em>: The ATS sheet contains the parameters of the storage. It’s the place where an object storage is defined with its characteristics (price and capacity mainly).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+<col style="width: 7.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pays</p></th>
+<th class="head"><p>NomStockage</p></th>
+<th class="head"><p>prix d’injection [€/MWh]</p></th>
+<th class="head"><p>prix de soutirage [€/MWh]</p></th>
+<th class="head"><p>Prix du volume nominal [€/MWh]</p></th>
+<th class="head"><p>% soutirage supplementaire à la pointe</p></th>
+<th class="head"><p>Volume admissible [MWh]</p></th>
+<th class="head"><p>Duree de soutirage [j]</p></th>
+<th class="head"><p>Duree d’injection [j]</p></th>
+<th class="head"><p>Mois démarrage année stockage</p></th>
+<th class="head"><p>Volume admissible dispo [MWh]</p></th>
+<th class="head"><p>Palier Injection (0,1)</p></th>
+<th class="head"><p>Palier Soutirage (0,1)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Country (eg: World)</p></td>
+<td><p>Name of the storage (eg: Fluxys - Loenhout)</p></td>
+<td><p>Injection price [€/MWh] (eg: 0.15)</p></td>
+<td><p>Withdrawal price [€/MWh] (eg: 0.08)</p></td>
+<td><p>Nominal volume price [€/MWh] (eg: 3.33)</p></td>
+<td><p>Additional withdrawal percentage at peak (eg: 0)</p></td>
+<td><p>Admissible volume [MWh] (eg: Volume_Fluxys - Loenhout)</p></td>
+<td><p>Withdrawal duration [days] (eg: 52)</p></td>
+<td><p>Injection duration [days] (eg: 100)</p></td>
+<td><p>Storage start month (eg: 4)</p></td>
+<td><p>Available admissible volume [MWh] (eg: AddVolume_Fluxys - Loenhout)</p></td>
+<td><p>Injection level (0,1) (eg: 1)</p></td>
+<td><p>Withdrawal level (0,1) (eg: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Pays</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The country where the storage is located.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ NomStockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The name of the storage.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ prix d’injection [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The price of injection.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ prix de soutirage [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The price of withdrawal.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Prix du volume nominal [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The price of the nominal volume.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ % soutirage supplementaire à la pointe</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The additional withdrawal percentage at peak.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Volume admissible [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The admissible volume.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-volume-utile-par-date"><span class="std std-ref">VolumeUtileParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Duree de soutirage [j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The withdrawal duration.</p></li>
+<li><p><em>Unit:</em> days</p></li>
+<li><p><em>Validity:</em> Integer.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Duree d’injection [j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The injection duration.</p></li>
+<li><p><em>Unit:</em> days</p></li>
+<li><p><em>Validity:</em> Integer.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Mois démarrage année stockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The storage start month.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Volume admissible dispo [MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The available admissible volume.</p></li>
+<li><p><em>Unit:</em> MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-volume-utile-par-date"><span class="std std-ref">VolumeUtileParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Palier Injection (0,1)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The injection level.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Boolean.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Palier Soutirage (0,1)</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The withdrawal level.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Boolean.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-pits">
+<p class="admonition-title">PITS</p>
+<p><em>Sheet Description</em>: The PITS (Point d’Interconnexion Transport Stockage) sheet contains the parameters for the link between the storage and the rest of the system. It’s another place to control the quatity available in the storage (capacity of injection/withdrawal) as well as the price of it.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+<col style="width: 1.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>zone</p></th>
+<th class="head"><p>Capacité souscrite en entrée [MWh/j]</p></th>
+<th class="head"><p>Capacité dispo en entrée [MWh/j]</p></th>
+<th class="head"><p>Capacité souscrite en sortie [MWh/j]</p></th>
+<th class="head"><p>Capacité dispo en sortie [MWh/j]</p></th>
+<th class="head"><p>Part de la capacité d’entrée à mettre de côté pour le court terme [%]</p></th>
+<th class="head"><p>Part de la capacité de sortie à mettre de côté pour le court terme [%]</p></th>
+<th class="head"><p>Mois démarrage capas annuelles</p></th>
+<th class="head"><p>Début modélisation capas annuelles entrée</p></th>
+<th class="head"><p>Début modélisation capas annuelles sortie</p></th>
+<th class="head"><p>Début modélisation capas trimestrielles entrée</p></th>
+<th class="head"><p>Début modélisation capas trimestrielles sortie</p></th>
+<th class="head"><p>Début modélisation capas mensuelles entrée</p></th>
+<th class="head"><p>Début modélisation capas mensuelles sortie</p></th>
+<th class="head"><p>Début modélisation capas journalières entrée</p></th>
+<th class="head"><p>Début modélisation capas journalières sortie</p></th>
+<th class="head"><p>Fin modélisation capas annuelles entrée</p></th>
+<th class="head"><p>Fin modélisation capas annuelles sortie</p></th>
+<th class="head"><p>Fin modélisation capas trimestrielles entrée</p></th>
+<th class="head"><p>Fin modélisation capas trimestrielles sortie</p></th>
+<th class="head"><p>Fin modélisation capas mensuelles entrée</p></th>
+<th class="head"><p>Fin modélisation capas mensuelles sortie</p></th>
+<th class="head"><p>Fin modélisation capas journalières entrée</p></th>
+<th class="head"><p>Fin modélisation capas journalières sortie</p></th>
+<th class="head"><p>Tarif Capacite entree [€/MWh/j]</p></th>
+<th class="head"><p>Tarif Capacite sortie [€/MWh/j]</p></th>
+<th class="head"><p>Tarif Variable entree [€/MWh]</p></th>
+<th class="head"><p>Tarif Variable sortie [€/MWh]</p></th>
+<th class="head"><p>Gas-in-kind entrée [%]</p></th>
+<th class="head"><p>Gas-in-kind sortie [%]</p></th>
+<th class="head"><p>Multiplicateur trimestriel Tarif Capa d’entrée</p></th>
+<th class="head"><p>Multiplicateur mensuel Tarif Capa d’entrée</p></th>
+<th class="head"><p>Multiplicateur journalier Tarif Capa d’entrée</p></th>
+<th class="head"><p>Multiplicateur trimestriel Tarif Capa de sortie</p></th>
+<th class="head"><p>Multiplicateur mensuel Tarif Capa de sortie</p></th>
+<th class="head"><p>Multiplicateur journalier Tarif Capa de sortie</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q1</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q2</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q3</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel entrée Q4</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel sortie Q1</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel sortie Q2</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel sortie Q3</p></th>
+<th class="head"><p>Facteur saisonnier trimestriel sortie Q4</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Janvier</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Février</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Mars</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Avril</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Mai</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Juin</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Juillet</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Août</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Septembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Octobre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Novembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel entrée Décembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Janvier</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Février</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Mars</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Avril</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Mai</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Juin</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Juillet</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Août</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Septembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Octobre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Novembre</p></th>
+<th class="head"><p>Facteur saisonnier mensuel sortie Décembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Janvier</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Février</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Mars</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Avril</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Mai</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Juin</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Juillet</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Août</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Septembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Octobre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Novembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier entrée Décembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Janvier</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Février</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Mars</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Avril</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Mai</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Juin</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Juillet</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Août</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Septembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Octobre</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Novembre</p></th>
+<th class="head"><p>Facteur saisonnier journalier sortie Décembre</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name (eg: bayernets | DE-NCG | Haidach)</p></td>
+<td><p>zone (eg: DE-H)</p></td>
+<td><p>Subscribed entry capacity [MWh/d] (eg: Entree_bayernets | DE-NCG | Haidach)</p></td>
+<td><p>Available entry capacity [MWh/d] (eg: AddEntree_bayernets | DE-NCG | Haidach)</p></td>
+<td><p>Subscribed exit capacity [MWh/d] (eg: Sortie_bayernets | DE-NCG | Haidach)</p></td>
+<td><p>Available exit capacity [MWh/d] (eg: AddSortie_bayernets | DE-NCG | Haidach)</p></td>
+<td><p>Percentage of entry capacity set aside for short term [%] (eg: 0%)</p></td>
+<td><p>Percentage of exit capacity set aside for short term [%] (eg: 0%)</p></td>
+<td><p>Annual capacity start month (eg: 10)</p></td>
+<td><p>Annual capacity modeling start date in (eg: 1/1/2020)</p></td>
+<td><p>Annual capacity modeling start date out (eg: 1/1/2100)</p></td>
+<td><p>Quarterly capacity modeling start date in (eg: 1/1/2020)</p></td>
+<td><p>Quarterly capacity modeling start date out (eg: 1/1/2100)</p></td>
+<td><p>Monthly capacity modeling start date in (eg: 1/1/2020)</p></td>
+<td><p>Monthly capacity modeling start date out (eg: 1/1/2100)</p></td>
+<td><p>Daily capacity modeling start date in (eg: 1/1/2020)</p></td>
+<td><p>Daily capacity modeling start date out (eg: 1/1/2100)</p></td>
+<td><p>Annual capacity modeling end date in (eg: 1/1/2020)</p></td>
+<td><p>Annual capacity modeling end date out (eg: 1/1/2100)</p></td>
+<td><p>Quarterly capacity modeling end date in (eg: 1/1/2020)</p></td>
+<td><p>Quarterly capacity modeling end date out (eg: 1/1/2100)</p></td>
+<td><p>Monthly capacity modeling end date in (eg: 1/1/2020)</p></td>
+<td><p>Monthly capacity modeling end date out (eg: 1/1/2100)</p></td>
+<td><p>Daily capacity modeling end date in (eg: 1/1/2020)</p></td>
+<td><p>Daily capacity modeling end date out (eg: 1/1/2100)</p></td>
+<td><p>Entry capacity tariff [€/MWh/d] (eg: 0.115519135)</p></td>
+<td><p>Exit capacity tariff [€/MWh/d] (eg: 0.095880855)</p></td>
+<td><p>Variable entry tariff [€/MWh] (eg: 0)</p></td>
+<td><p>Variable exit tariff [€/MWh] (eg: 0)</p></td>
+<td><p>Gas-in-kind entry [%] (eg: 0%)</p></td>
+<td><p>Gas-in-kind exit [%] (eg: 0%)</p></td>
+<td><p>Quarterly entry capacity tariff multiplier (eg: 1.1)</p></td>
+<td><p>Monthly entry capacity tariff multiplier (eg: 1.25)</p></td>
+<td><p>Daily entry capacity tariff multiplier (eg: 1.4)</p></td>
+<td><p>Quarterly exit capacity tariff multiplier (eg: 1.1)</p></td>
+<td><p>Monthly exit capacity tariff multiplier (eg: 1.25)</p></td>
+<td><p>Daily exit capacity tariff multiplier (eg: 1.4)</p></td>
+<td><p>Quarterly seasonal factor entry Q1 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q2 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q3 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor entry Q4 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor exit Q1 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor exit Q2 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor exit Q3 (eg: 1)</p></td>
+<td><p>Quarterly seasonal factor exit Q4 (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry January (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry February (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry March (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry April (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry May (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry June (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry July (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry August (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry September (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry October (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry November (eg: 1)</p></td>
+<td><p>Monthly seasonal factor entry December (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit January (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit February (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit March (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit April (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit May (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit June (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit July (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit August (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit September (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit October (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit November (eg: 1)</p></td>
+<td><p>Monthly seasonal factor exit December (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry January (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry February (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry March (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry April (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry May (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry June (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry July (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry August (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry September (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry October (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry November (eg: 1)</p></td>
+<td><p>Daily seasonal factor entry December (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit January (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit February (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit March (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit April (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit May (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit June (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit July (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit August (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit September (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit October (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit November (eg: 1)</p></td>
+<td><p>Daily seasonal factor exit December (eg: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nom</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The name of the storage.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ zone</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The zone where the storage is located.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="model_overview.html#target-zones"><span class="std std-ref">Zones</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité souscrite en entrée [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The subscribed entry capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité dispo en entrée [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The available entry capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité souscrite en sortie [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The subscribed exit capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capacité dispo en sortie [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The available exit capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-capa-par-pdt"><span class="std std-ref">CapaParPdt</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Part de la capacité d’entrée à mettre de côté pour le court terme [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The percentage of entry capacity set aside for short term.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Part de la capacité de sortie à mettre de côté pour le court terme [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The percentage of exit capacity set aside for short term.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Mois démarrage capas annuelles</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The annual capacity start month.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas annuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The annual capacity modeling start date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas annuelles sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The annual capacity modeling start date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas trimestrielles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly capacity modeling start date for entry.</p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas trimestrielles sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly capacity modeling start date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas mensuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly capacity modeling start date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+<li><p><em>Description:</em> The monthly capacity modeling start date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas journalières entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily capacity modeling start date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Début modélisation capas journalières sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily capacity modeling start date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas annuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The annual capacity modeling end date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas annuelles sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The annual capacity modeling end date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas trimestrielles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly capacity modeling end date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas trimestrielles sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly capacity modeling end date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas mensuelles entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly capacity modeling end date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas mensuelles sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly capacity modeling end date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas journalières entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily capacity modeling end date for entry.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin modélisation capas journalières sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily capacity modeling end date for exit.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Capacite entree [€/MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The entry capacity tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-tarif-par-date"><span class="std std-ref">TarifParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Capacite sortie [€/MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The exit capacity tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh/d</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-tarif-par-date"><span class="std std-ref">TarifParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Variable entree [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The variable entry tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-tarif-par-date"><span class="std std-ref">TarifParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif Variable sortie [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The variable exit tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-tarif-par-date"><span class="std std-ref">TarifParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Gas-in-kind entrée [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas-in-kind entry percentage.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Gas-in-kind sortie [%]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas-in-kind exit percentage.</p></li>
+<li><p><em>Unit:</em> %</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur trimestriel Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur mensuel Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur journalier Tarif Capa d’entrée</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily entry capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur trimestriel Tarif Capa de sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly exit capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur mensuel Tarif Capa de sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly exit capacity tariff multiplier.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Multiplicateur journalier Tarif Capa de sortie</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily exit capacity tariff multiplier.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q1</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for entry in Q1.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q2</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for entry in Q2.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q3</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for entry in Q3.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel entrée Q4</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for entry in Q4.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel sortie Q1</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for exit in Q1.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel sortie Q2</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for exit in Q2.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel sortie Q3</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for exit in Q3.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier trimestriel sortie Q4</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The quarterly seasonal factor for exit in Q4.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in March.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in April.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in June.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Juillet</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in July.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in August.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in September.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Octobre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in November.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel entrée Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for entry in December.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in March.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in April.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in June.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Juillet</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in July.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in August.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in September.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Octobre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in November.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier mensuel sortie Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The monthly seasonal factor for exit in December.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in March.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in April.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in June.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Juillet</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in July.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in August.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in September.</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+<li><p><em>Description:</em> The daily seasonal factor for entry in October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in November.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier entrée Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for entry in December.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Janvier</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in January.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Février</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in February.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Mars</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in March.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Avril</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in April.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Mai</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in May.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Juin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in June.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Juillet</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in July.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Août</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in August.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Septembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in September.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Octobre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in October.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Novembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in November.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur saisonnier journalier sortie Décembre</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The daily seasonal factor for exit in December.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-raccordements-pits">
+<p class="admonition-title">RaccordementsPITS</p>
+<p><em>Sheet Description</em>: The PITS are connected to another object - Gas Account. Such account allow to have a many to one relation as one gas account can be linked to multiple pits.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CompteGaz</p></th>
+<th class="head"><p>PITS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gas Account (eg: astora - Haidach | DE-NCG | Haidach)</p></td>
+<td><p>PITS (eg: bayernets | DE-NCG | Haidach)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ CompteGaz</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas account.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-comptes-gaz"><span class="std std-ref">ComptesGaz</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ PITS</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The PITS.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-pits"><span class="std std-ref">PITS</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-comptes-gaz">
+<p class="admonition-title">ComptesGaz</p>
+<p><em>Sheet Description</em>: The storage are also linked to the Gas Account. Such account allow to have a many to one relation as one storage can be linked to multiple gas account.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CompteGaz</p></th>
+<th class="head"><p>NomStockage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gas Account (eg: astora - Haidach | DE-NCG)</p></td>
+<td><p>Storage Name (eg: astora - Haidach)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ CompteGaz</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas account.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-raccordements-pits"><span class="std std-ref">RaccordementsPITS</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ NomStockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The storage name.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-ats"><span class="std std-ref">ATS</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-transferts-comptes-gaz">
+<p class="admonition-title">TransfertsComptesGaz</p>
+<p><em>Sheet Description</em>: This sheet defines the transfer between gas accounts with an assiciated cost.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Nom</p></th>
+<th class="head"><p>Compte gaz émetteur</p></th>
+<th class="head"><p>Compte gaz récepteur</p></th>
+<th class="head"><p>Tarif de transfert [€/MWh]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name (eg: astora - Jemgum | DE-GPL&gt;NL)</p></td>
+<td><p>Gas Account Emitter (eg: astora - Jemgum | DE-GPL)</p></td>
+<td><p>Gas Account Receiver (eg: astora - Jemgum | NL)</p></td>
+<td><p>Transfer tariff (eg: 0.30)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ Nom</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The name of the transfer.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Compte gaz émetteur</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas account emitter.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-comptes-gaz"><span class="std std-ref">ComptesGaz</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Compte gaz récepteur</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The gas account receiver.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-comptes-gaz"><span class="std std-ref">ComptesGaz</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tarif de transfert [€/MWh]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The transfer tariff.</p></li>
+<li><p><em>Unit:</em> €/MWh</p></li>
+<li><p><em>Validity:</em> Float or String. If string, it must be part of the <a class="reference internal" href="time_series.html#target-tarif-par-date"><span class="std std-ref">TarifParDate</span></a> sheet.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-remplissage-stockage-final">
+<p class="admonition-title">RemplissageStockageFinal</p>
+<p><em>Sheet Description</em>: This sheet defines the final level of the storages.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Stockage</p></th>
+<th class="head"><p>Niveau final [0..100]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Storage (eg: astora - Haidach)</p></td>
+<td><p>Final level (eg: 100)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Mandatory sheet</em>: ❌</p>
+<dl class="simple">
+<dt>⚙️ Stockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The storage.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-ats"><span class="std std-ref">ATS</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Niveau final [0..100]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The final level.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Integer.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-maintenance-stockage">
+<p class="admonition-title">MaintenanceStockage</p>
+<p><em>Sheet Description</em>: This sheet defines the storage maintenance.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomStockage</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Debut</p></th>
+<th class="head"><p>Fin</p></th>
+<th class="head"><p>Capa restante [MWh/j]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Storage Name (eg: RAGES - RAG Storage Pool)</p></td>
+<td><p>Direction (eg: Injection)</p></td>
+<td><p>Start (eg: 4/8/2019)</p></td>
+<td><p>End (eg: 4/14/2019)</p></td>
+<td><p>Remaining capacity (eg: 193,848)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomStockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The storage name.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-ats"><span class="std std-ref">ATS</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Direction</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The direction.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be either “Injection” or “Withdrawal”.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Debut</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The start date.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Fin</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The end date.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Capa restante [MWh/j]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The remaining capacity.</p></li>
+<li><p><em>Unit:</em> MWh/d</p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+<section id="storage-constraints-used-in-cats-algorithm">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Storage constraints used in CATS algorithm</a><a class="headerlink" href="#storage-constraints-used-in-cats-algorithm" title="Link to this heading"></a></h3>
+<div class="error admonition" id="target-tunnel-par-date">
+<p class="admonition-title">TunnelParDate</p>
+<p><em>Sheet Description</em>: In Cactus, in order to refine the modelling of the storages it’s possible to define ratcheting constraints. The very simplistic idea is that it’s easier to fill up an empty storage than to empty a full one. Same apply for unloading a full one vs an empty one. Here the constraints defined in this sheet are not directly used in the Cactus model. The idea is that this sheet is read when building up the <cite>cats.xml</cite> file and then the constraints are added in the main model.</p>
+<p>Here, this sheet is used to define the tunnel constraints for the storages. It means that we are able here to play on the min and max level of the storage.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomStockage</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Tunnel Min [0,1]</p></th>
+<th class="head"><p>Tunnel Max [0,1]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name of the storage (eg: Storengy - Serene Nord)</p></td>
+<td><p>Date (eg: 4/1/2018)</p></td>
+<td><p>Tunnel Min (eg: 0)</p></td>
+<td><p>Tunnel Max (eg: 0.4)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomStockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The name of the storage.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-ats"><span class="std std-ref">ATS</span></a> sheet. It can be left empty and if so the tunnel constraints will be applied to the storage define above.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Date</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The date.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Date.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tunnel Min [0,1]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The minimum tunnel.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Tunnel Max [0,1]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The maximum tunnel.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="error admonition" id="target-facteurs-reduction">
+<p class="admonition-title">FacteursReduction</p>
+<p><em>Sheet Description</em>: This sheet defines the reduction factors for the storages. This means that we are able to define a factor that will be applied to the injection or withdrawal capacity of the storage.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>NomStockage</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Niveau [0,1]</p></th>
+<th class="head"><p>Facteur [0,1]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name of the storage (eg: Fluxys - Loenhout)</p></td>
+<td><p>Direction (eg: Injection)</p></td>
+<td><p>Level (eg: 0)</p></td>
+<td><p>Factor (eg: 1)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>⚙️ NomStockage</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The name of the storage.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be part of the <a class="reference internal" href="#target-ats"><span class="std std-ref">ATS</span></a> sheet.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Direction</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The direction.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> String. Must be either “Injection” or “Withdrawal”.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Niveau [0,1]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The level.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+<dt>⚙️ Facteur [0,1]</dt><dd><ul class="simple">
+<li><p><em>Description:</em> The factor.</p></li>
+<li><p><em>Unit:</em> <em>None</em></p></li>
+<li><p><em>Validity:</em> Float.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pipeline.html" class="btn btn-neutral float-left" title="Pipelines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sddp.html" class="btn btn-neutral float-right" title="SDDP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Advanced Analytics @ ENGIE.
+      <span class="lastupdated">Last updated on Feb 24, 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
